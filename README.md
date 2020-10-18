@@ -1,2 +1,2 @@
 # learnpy
-Python package for supervised &amp; unsupervised learning
+Python package for supervised &amp; unsupervised learning.
