@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 class RandVar:
     """
-    Class for representing continuous random variables.
+    Class for representing continuous random variables in 1D.
     """
     def __init__(self, pdf, domain):
         """Construct a RandVar from a pdf and a domain."""
@@ -46,10 +46,11 @@ class RandVar:
     
     def display(self):
         """Display informatons about self."""
+        tol = 6
         print('------------------')
-        print('norm:', round(self.norm(), 10))
-        print('mean:', round(self.mean(), 10))
-        print('var: ', round(self.var(), 10),  '\n')
+        print('norm:', round(self.norm(), tol))
+        print('mean:', round(self.mean(), tol))
+        print('var: ', round(self.var(), tol),  '\n')
 
     def scale(self, scaling, shift):
         """Return scaling*self + shift."""
@@ -72,11 +73,11 @@ class RandVar:
         """Return self - randvar."""
         return RandVar.plus(self, RandVar.scale(randvar, -1, 0))
          
-    def plot(self):
+    def plot(self, param=[]):
         """Plot the pdf of self."""
         left_bound = self.domain[0]
         right_bound = self.domain[1]
         number_points = int(round(100*(right_bound - left_bound)))
         x = np.linspace(left_bound, right_bound, number_points)
-        y = [self.pdf(i) for i in x]
-        plt.plot(x, y)
+        y = np.vectorize(self.pdf)(x)
+        plt.plot(x, y, param)
