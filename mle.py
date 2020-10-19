@@ -10,7 +10,7 @@ from math import exp, sqrt, pi
 from RandVar import RandVar
 from RandVar2 import RandVar2
 
-def maxlikest(data, model):
+def mle(data, model):
     """ 
     Fit the given data with a prescribed model using MLE.
     
