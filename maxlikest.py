@@ -39,8 +39,7 @@ def maxlikest(data, model):
             mean = np.array([mean_x, mean_y])
             covar_xx = 1/n*sum([(x - mean_x)**2 for x in data[:,0]])
             covar_yy = 1/n*sum([(x - mean_y)**2 for x in data[:,1]])
-            mean_xy = 1/n*np.sum(data[:,0]*data[:,1])
-            covar_xy = mean_xy - mean_x*mean_y
+            covar_xy = 1/n*sum((data[:,0]-mean_x)*(data[:,1]-mean_y))
             covar = np.array([[covar_xx, covar_xy], [covar_xy, covar_yy]])
             covar_inv = np.linalg.inv(covar)
             determinant = np.linalg.det(covar)
@@ -58,4 +57,3 @@ def maxlikest(data, model):
                                left_y_bound, right_y_bound])
             randvar2 = RandVar2(pdf, domain)
         return randvar2
-            
