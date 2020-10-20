@@ -9,14 +9,30 @@ from IPython import get_ipython
 import matplotlib.pyplot as plt
 import numpy as np
 from mle_classifier import mle_classifier
+from csv_to_array import csv_to_array
 
 # Clear workspace:
 get_ipython().magic('clear')
 get_ipython().magic('reset -f')
 
 # Fit the following data (in cm) with a normal distribution & MLE:
-training_data = np.array([[170,1], [172,1], [180,1], [169,0], [157,0], [166,0]])
-testing_data = np.array([[175,1], [185,1], [150,1], [159,0], [160,0], [180,0]])
+training_data = csv_to_array('heights_training.csv')
+testing_data = csv_to_array('heights_testing.csv')
 prior = np.array([0.5, 0.5])
 output = mle_classifier(training_data, testing_data, prior, 'normal')
-print(output)
+
+# Post-processing:
+randvar_0 = output[0]
+randvar_1 = output[1]   
+error = output[4]   
+print('Error:', sum(error), '\n')
+randvar_0.plot('b')
+randvar_1.plot('r')
+for k in range(len(testing_data)):
+    if training_data[k,1] == 0:
+        color = 'xb'
+    else:
+        color = 'xr'
+    plt.plot(testing_data[k,0], 0, color)
+    if error[k] != 0:
+        plt.plot(testing_data[k,0], 0, '+k')

@@ -10,39 +10,37 @@ from mle import mle
 
 def mle_classifier(training_data, testing_data, prior, model):
     """ 
-    Use a MLE-based learning algorithm.
+    Use a Maximum Likelihood Estimator-based learning algorithm.
     
-    The data can be 1D or 2D; models include 'normal'.
+    The first column of the training and testing data represents the data, 
+    while the second colum represents the label (0 or 1).
     """
-    n = len(training_data)
-    m = len(testing_data)
+    testing_data_len = len(testing_data)
     dimension = len(training_data.shape) - 1
     
+    # One-dimensional case:
     if dimension == 1:
         
-        # Training:
-        training_data_0 = []
-        training_data_1 = []
-        for k in range(n):
-            if training_data[k,1] == 0:
-                training_data_0.append(training_data[k,0])
-            else:
-                training_data_1.append(training_data[k,0])
-        training_data_0 = np.array(training_data_0)
-        training_data_1 = np.array(training_data_1)
+        # Separate labels 0 and 1:
+        training_data = np.array(training_data)
+        training_data_0 = training_data[training_data[:,1]==0][:,0]
+        training_data_1 = training_data[training_data[:,1]==1][:,0]
+        
+        # Use the MLE for training:
         randvar_0 = mle(training_data_0, model)
         randvar_1 = mle(training_data_1, model)
         
         # Testing:
-        error = 0
-        for k in range(m):
-            proba_0 = randvar_0.pdf(testing_data[k,0])*prior[0]
-            proba_1 = randvar_1.pdf(testing_data[k,0])*prior[1]
-            if proba_0 > proba_1:
-                type = 0
-            else:
-                type = 1
-        if type != training_data[k,1]:
-                error += 1
-        error = 1/n*error
-        return error
+        error = []
+        proba_0 = []
+        proba_1 = []
+        for k in range(testing_data_len):
+            p_0 = randvar_0.pdf(testing_data[k,0])*prior[0]
+            p_1 = randvar_1.pdf(testing_data[k,0])*prior[1]
+            label = float(p_0 < p_1)
+            proba_0.append(p_0)
+            proba_1.append(p_1)
+            error.append(1/testing_data_len*float(label != testing_data[k,1]))
+                
+        # Outputs:
+        return randvar_0, randvar_1, proba_0, proba_1, error
