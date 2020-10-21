@@ -12,12 +12,23 @@ from RandVar2 import RandVar2
 
 def mle(data, model):
     """ 
-    Fit the given data with a prescribed model using MLE.
+    Fit the given data with a prescribed model using the maximum likelihood
+    estimation. The data can be 1D or 2D. Models include 'normal'.
     
-    The data can be 1D or 2D; models include 'normal'.
+    For example, with 1D data:
+        
+        import numpy as np
+        from mle import mle
+        
+        data = np.array([170, 172, 180, 169, 175])
+        mle(data, 'normal')
     """
+    # Get the number of data and the dimension:
     n = len(data)
-    dimension = len(data.shape)
+    if len(data.shape) == 1:
+        dimension = 1
+    else:
+        dimension = min(data.shape)
     
     # One-dimensional case.
     if dimension == 1:

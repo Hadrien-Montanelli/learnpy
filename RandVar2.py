@@ -90,8 +90,8 @@ class RandVar2:
         right_x_bound = self.domain[1]
         left_y_bound = self.domain[2]
         right_y_bound = self.domain[3]
-        number_x_points = int(round(10*(right_x_bound - left_x_bound)))
-        number_y_points = int(round(10*(right_y_bound - left_y_bound)))
+        number_x_points = int(10*(right_x_bound - left_x_bound))
+        number_y_points = int(10*(right_y_bound - left_y_bound))
         x = np.linspace(left_x_bound, right_x_bound, number_x_points)
         y = np.linspace(left_y_bound, right_y_bound, number_y_points)
         X,Y = meshgrid(x,y)

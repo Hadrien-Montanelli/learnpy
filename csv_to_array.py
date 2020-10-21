@@ -11,9 +11,10 @@ import numpy as np
 def csv_to_array(csv_file):
     """Convert a csv file to a numpy array."""
     data_list = list(csv.reader(open(csv_file)))
-    data_len = len(data_list)
-    data_array = np.zeros([data_len,2])
-    for k in range(data_len):
-        for l in range(2):
+    number_rows = len(data_list)
+    number_cols = len(data_list[0])
+    data_array = np.zeros([number_rows,number_cols])
+    for k in range(number_rows):
+        for l in range(number_cols):
             data_array[k,l] = data_list[k][l]
     return data_array

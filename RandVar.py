@@ -77,7 +77,7 @@ class RandVar:
         """Plot the pdf of self."""
         left_bound = self.domain[0]
         right_bound = self.domain[1]
-        number_points = int(round(100*(right_bound - left_bound)))
+        number_points = int(100*(right_bound - left_bound))
         x = np.linspace(left_bound, right_bound, number_points)
         y = np.vectorize(self.pdf)(x)
         plt.plot(x, y, param)
