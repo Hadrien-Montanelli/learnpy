@@ -34,7 +34,7 @@ def mle(data, model):
     if dimension == 1:
         if model == 'normal':
             mean = 1/n*sum(data)
-            var = 1/n*sum([(x - mean)**2 for x in data])
+            var = 1/(n-1)*sum([(x - mean)**2 for x in data])
             pdf = lambda x: 1/sqrt(2*pi*var)*exp(-1/(2*var)*(x-mean)**2)
             left_bound = min(data) - 3*sqrt(var)
             right_bound = max(data) + 3*sqrt(var)
@@ -48,9 +48,9 @@ def mle(data, model):
             mean_x = 1/n*sum(data)[0]
             mean_y = 1/n*sum(data)[1]
             mean = np.array([mean_x, mean_y])
-            covar_xx = 1/n*sum([(x - mean_x)**2 for x in data[:,0]])
-            covar_yy = 1/n*sum([(x - mean_y)**2 for x in data[:,1]])
-            covar_xy = 1/n*sum((data[:,0]-mean_x)*(data[:,1]-mean_y))
+            covar_xx = 1/(n-1)*sum([(x - mean_x)**2 for x in data[:,0]])
+            covar_yy = 1/(n-1)*sum([(x - mean_y)**2 for x in data[:,1]])
+            covar_xy = 1/(n-1)*sum((data[:,0]-mean_x)*(data[:,1]-mean_y))
             covar = np.array([[covar_xx, covar_xy], [covar_xy, covar_yy]])
             covar_inv = np.linalg.inv(covar)
             determinant = np.linalg.det(covar)
