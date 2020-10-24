@@ -5,13 +5,18 @@ Created on Thu Oct 22 17:22:50 2020
 
 @author: montanelli
 """
+from IPython import get_ipython
 from pca import pca
-from list_to_array import list_to_array
+from utilities import list_to_array
 import csv
 import matplotlib.pyplot as plt
 
+# Clear workspace:
+get_ipython().magic('clear')
+get_ipython().magic('reset -f')
+
 # Load data:
-data = list(csv.reader(open('crabs.csv')))
+data = list(csv.reader(open('../data/crabs.csv')))
 data.pop(0)
 for row in data:
     del row[0]

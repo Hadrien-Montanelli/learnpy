@@ -9,15 +9,15 @@ from IPython import get_ipython
 import matplotlib.pyplot as plt
 import numpy as np
 from mle_classifier import mle_classifier
-from csv_to_array import csv_to_array
+from utilities import csv_to_array
 
 # Clear workspace:
 get_ipython().magic('clear')
 get_ipython().magic('reset -f')
 
 # Fit the following data (in cm) with a normal distribution & MLE:
-training_data = csv_to_array('heights_training.csv')
-testing_data = csv_to_array('heights_testing.csv')
+training_data = csv_to_array('../data/heights_training.csv')
+testing_data = csv_to_array('../data/heights_testing.csv')
 prior = np.array([0.5, 0.5])
 output = mle_classifier(training_data, testing_data, prior, 'normal')
 
@@ -38,8 +38,8 @@ for k in range(len(testing_data)):
         plt.plot(testing_data[k,0], 0, '+k')
         
 # Fit the following data (in cm) with a normal distribution & MLE:
-training_data = csv_to_array('heights_weights_training.csv')
-testing_data = csv_to_array('heights_weights_testing.csv')
+training_data = csv_to_array('../data/heights_weights_training.csv')
+testing_data = csv_to_array('../data/heights_weights_testing.csv')
 prior = np.array([0.5, 0.5])
 output = mle_classifier(training_data, testing_data, prior, 'normal')
 
