@@ -2,9 +2,9 @@
 Python package for supervised &amp; unsupervised learning.
 
 Algorithms for supervised learning include:
-- maximum likelihood estimation ('mle_classifier' function);
-- k-nearest neighbours ('knns' function).
+- maximum likelihood estimation (`mle_classifier` function);
+- k-nearest neighbours (`knns` function).
 
 Algorithms for unsupervised learning include:
-- k-means ('kmeans' function).
+- k-means (`kmeans` function).
 
