@@ -5,6 +5,8 @@ Created on Fri Oct 23 16:06:00 2020
 
 @author: montanelli
 """
+import sys
+sys.path.append('../')
 from IPython import get_ipython
 from kmeans import kmeans
 from utilities import csv_to_array

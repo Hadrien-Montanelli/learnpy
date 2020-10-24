@@ -5,6 +5,8 @@ Created on Sun Oct 18 17:56:46 2020
 
 @author: montanelli
 """
+import sys
+sys.path.append('../')
 from IPython import get_ipython
 import matplotlib.pyplot as plt
 import numpy as np

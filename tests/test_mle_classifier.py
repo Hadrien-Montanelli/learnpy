@@ -5,6 +5,8 @@ Created on Sun Oct 18 17:56:46 2020
 
 @author: montanelli
 """
+import sys
+sys.path.append('../')
 from IPython import get_ipython
 import matplotlib.pyplot as plt
 import numpy as np
@@ -37,7 +39,7 @@ for k in range(len(testing_data)):
     if error[k] != 0:
         plt.plot(testing_data[k,0], 0, '+k')
         
-# Fit the following data (in cm) with a normal distribution & MLE:
+# Fit the following data (in [cm, kg]) with a normal distribution & MLE:
 training_data = csv_to_array('../data/heights_weights_training.csv')
 testing_data = csv_to_array('../data/heights_weights_testing.csv')
 prior = np.array([0.5, 0.5])

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -5,6 +6,8 @@ Created on Thu Oct 22 17:22:50 2020
 
 @author: montanelli
 """
+import sys
+sys.path.append('../')
 from IPython import get_ipython
 from pca import pca
 from utilities import list_to_array

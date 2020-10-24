@@ -14,10 +14,7 @@ def kmeans(data, k):
     number_rows = len(data)
     
     # Assign each observation to one of the clusters:
-    cluster_index = []
-    for i in range(k-1):
-        cluster_index.append([i])
-    cluster_index.append([i for i in range(k-1, number_rows)])
+    cluster_index = initialise_cluster_index(k, number_rows)
     
     # Iterate the following 2 steps until cluster assignments stop changing:
     test = 0
@@ -49,3 +46,11 @@ def compute_cluster_mean(data, cluster_index):
     number_rows = len(cluster_index)
     cluster_mean = 1/number_rows*np.sum(data[cluster_index, :], 0)
     return cluster_mean
+
+def initialise_cluster_index(k, number_rows): 
+    # TO IMPROVE: do a random assignment.
+    cluster_index = []
+    for i in range(k-1):
+        cluster_index.append([i])
+    cluster_index.append([i for i in range(k-1, number_rows)])
+    return cluster_index

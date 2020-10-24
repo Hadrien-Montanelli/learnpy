@@ -6,6 +6,8 @@ Created on Mon Oct 19 14:21:10 2020
 @author: montanelli
 """
 # Imports:
+import sys
+sys.path.append('../')
 from math import exp, sqrt, pi
 from IPython import get_ipython
 import numpy as np

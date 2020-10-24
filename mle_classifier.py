@@ -27,7 +27,7 @@ def mle_classifier(training_data, testing_data, prior, model):
         mle_classifier(training_data, testing_data, prior, 'normal')
     """
     # Get dimensions:
-    number_rows = len(testing_data)
+    number_rows_testing = len(testing_data)
     number_cols = len(testing_data[0])
     
     # Separate labels 0 and 1:
@@ -43,7 +43,7 @@ def mle_classifier(training_data, testing_data, prior, model):
     error = []
     proba_0 = []
     proba_1 = []
-    for k in range(number_rows):
+    for k in range(number_rows_testing):
         
         # One-dimensional case:
         if number_cols == 2:
@@ -51,13 +51,14 @@ def mle_classifier(training_data, testing_data, prior, model):
             p_1 = randvar_1.pdf(testing_data[k,0])*prior[1]
             
         # Two-dimensional case:
-        else:
+        if number_cols == 3:
             p_0 = randvar_0.pdf(testing_data[k,0],testing_data[k,1])*prior[0]
             p_1 = randvar_1.pdf(testing_data[k,0],testing_data[k,1])*prior[1]
+            
         label = float(p_0 < p_1)
         proba_0.append(p_0)
         proba_1.append(p_1)
-        error.append(1/number_rows*float(label != testing_data[k,-1]))
+        error.append(1/number_rows_testing*float(label != testing_data[k,-1]))
             
     # Outputs:
     return randvar_0, randvar_1, proba_0, proba_1, error
