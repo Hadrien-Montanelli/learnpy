@@ -39,9 +39,9 @@ def knns(training_data, testing_data, k):
         dist_to_training = np.zeros(number_rows_training)
         
         for i in range(number_rows_training):
-            x = testing_data[j,0:number_cols-1]
-            y = training_data[i,0:number_cols-1]
-            dist_to_training[i] = dist(x, y)
+            x_j = testing_data[j,0:number_cols-1]
+            x_i = training_data[i,0:number_cols-1]
+            dist_to_training[i] = dist(x_j, x_i)
             
         pos_min = np.argmin(dist_to_training)
         label = testing_data[int(pos_min), -1]
