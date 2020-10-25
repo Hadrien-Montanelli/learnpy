@@ -28,7 +28,7 @@ def kmeans(data, k):
         # Re-assign all observations to the cluster whose mean is closest:
         new_cluster_index = [[] for _ in range(k)]
         for i in range(number_rows):
-            dist_to_cluster = np.zeros([k, 1])
+            dist_to_cluster = np.zeros(k)
             for j in range(k):
                 dist_to_cluster[j] = LA.norm(data[i,:] - cluster_mean[j])**2  
             pos_min = np.argmin(dist_to_cluster)

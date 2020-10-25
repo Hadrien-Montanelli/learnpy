@@ -29,11 +29,11 @@ def mle_classifier(training_data, testing_data, prior, model):
     # Get dimensions:
     number_rows_testing = len(testing_data)
     number_cols = len(testing_data[0])
+    dimension = number_cols - 1
     
     # Separate labels 0 and 1:
-    training_data = np.array(training_data)
-    training_data_0 = training_data[training_data[:,-1]==0][:,0:number_cols-1]
-    training_data_1 = training_data[training_data[:,-1]==1][:,0:number_cols-1]
+    training_data_0 = training_data[training_data[:,-1]==0][:,0:dimension]
+    training_data_1 = training_data[training_data[:,-1]==1][:,0:dimension]
     
     # Use the MLE for training:
     randvar_0 = mle(training_data_0, model)
@@ -46,12 +46,12 @@ def mle_classifier(training_data, testing_data, prior, model):
     for k in range(number_rows_testing):
         
         # One-dimensional case:
-        if number_cols == 2:
+        if dimension == 1:
             p_0 = randvar_0.pdf(testing_data[k,0])*prior[0]
             p_1 = randvar_1.pdf(testing_data[k,0])*prior[1]
             
         # Two-dimensional case:
-        if number_cols == 3:
+        if dimension == 2:
             p_0 = randvar_0.pdf(testing_data[k,0],testing_data[k,1])*prior[0]
             p_1 = randvar_1.pdf(testing_data[k,0],testing_data[k,1])*prior[1]
             

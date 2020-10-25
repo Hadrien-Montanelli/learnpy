@@ -26,7 +26,6 @@ def knns(training_data, testing_data, k):
     number_cols = len(testing_data[0])
     
     # Separate labels 0 and 1:
-    training_data = np.array(training_data)
     training_data_0 = training_data[training_data[:,-1]==0][:,0:number_cols-1]
     training_data_1 = training_data[training_data[:,-1]==1][:,0:number_cols-1]
     
@@ -37,7 +36,7 @@ def knns(training_data, testing_data, k):
     error = []
     for j in range(number_rows_testing):
         
-        dist_to_training = np.zeros([number_rows_training, 1])
+        dist_to_training = np.zeros(number_rows_training)
         
         for i in range(number_rows_training):
             x = testing_data[j,0:number_cols-1]

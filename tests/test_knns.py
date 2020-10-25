@@ -8,8 +8,6 @@ Created on Sat Oct 24 17:05:25 2020
 import sys
 sys.path.append('../')
 from IPython import get_ipython
-#import matplotlib.pyplot as plt
-#import numpy as np
 from knns import knns
 from utilities import csv_to_array
 
