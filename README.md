@@ -8,3 +8,7 @@ Algorithms for supervised learning include:
 
 Algorithms for unsupervised learning include:
 - *k*-means (`kmeans` function).
+
+Also included:
+- princpal componenent analysis (`pca` function);
+- regression (`regression` function).

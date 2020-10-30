@@ -20,6 +20,9 @@ get_ipython().magic('reset -f')
 # Use the Perceptron algorithm on the following data (in [cm, kg]):
 training_data = csv_to_array('../data/heights_weights_training.csv')
 testing_data = csv_to_array('../data/heights_weights_testing.csv')
+bias = -200
+training_data[:,1] = training_data[:,1] + bias
+testing_data[:,1] = testing_data[:,1] + bias
 output = perceptron(training_data, testing_data)
 number_rows = len(training_data)
 fig = plt.figure()
@@ -36,14 +39,10 @@ for i in range(number_rows):
     else:
         color = 'xb'
     plt.plot(testing_data[i,0],testing_data[i,1],color)
-alpha = output[0]
-error = output[1]
+error = output[2]
 print('Error:', sum(error), '\n')
-w = np.zeros(len(training_data[0])-1)
-w0 = 0
-for k in range(number_rows):
-    w += alpha[k]*(2*training_data[k,-1]-1)*training_data[k,0:2]
-    w0 += alpha[k]*(2*training_data[k,-1]-1)
+w = output[1]
+w0 = output[0]
 xx = np.linspace(np.min(testing_data[:,0]), np.max(testing_data[:,0]), 100)
 plt.plot(xx, -w[0]/w[1]*xx - w0/w[1], 'k')
 print([w0,w])

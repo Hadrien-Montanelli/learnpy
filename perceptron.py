@@ -25,63 +25,26 @@ def perceptron(training_data, testing_data):
     training_data[:,-1] = 2*training_data[:,-1] - 1
     testing_data[:,-1] = 2*testing_data[:,-1] - 1
 
-    # # Training:
-    # iter = 0
-    # iter_max = 100
-    # w0 = 0
-    # w = np.zeros(number_cols-1)
-    # while iter < iter_max:
-    #     for i in range(number_rows_training):
-    #         label = np.sign(w @ training_data[i,0:number_cols-1] + w0)
-    #         if label != training_data[i,-1]:
-    #             w += training_data[i,-1]*training_data[i,0:number_cols-1]
-    #             w0 += training_data[i,-1]
-    #     iter += 1
-    
-    # # Testing: 
-    # error = []
-    # for i in range(number_rows_testing):
-    #     label = np.sign(w @ testing_data[i,0:number_cols-1] + w0)
-    #     error.append(1/number_rows_testing*float(label != testing_data[i,-1]))
-        
-    # return w0, w, error
-
     # Training:
-    iter = 0
-    iter_max = 100
-    kernel = compute_kernel(training_data)
-    alpha = np.zeros(number_rows_training)
-    while iter < iter_max:
+    test = 0
+    iteration = 0
+    w0 = 0
+    w = np.zeros(number_cols-1)
+    while test == 0:
+        test = 1
         for i in range(number_rows_training):
-            label = 0
-            #x_i = training_data[i,0:number_cols-1]
-            x_i = training_data[i,:]
-            for j in range(number_rows_training):
-                #x_j = training_data[j,0:number_cols-1] 
-                x_j = training_data[j,:] 
-                y_j = training_data[j,-1] 
-                label += alpha[j]*y_j*(kernel(x_i,i) @ kernel(x_j,j))
-            label = np.sign(label)
+            label = np.sign(w @ training_data[i,0:number_cols-1] + w0)
             if label != training_data[i,-1]:
-                alpha[i] += 1
-        iter += 1
-
-    # Testing: 
-    error = np.zeros(number_rows_testing)
-    for i in range(number_rows_testing):
-        label = 0
-        x_i = testing_data[i,0:number_cols-1] 
-        for j in range(number_rows_training):
-            x_j = training_data[j,0:number_cols-1] 
-            y_j = training_data[j,-1]
-            label += alpha[j]*y_j*(x_i @ x_j + 1)
-        label = np.sign(label)
-        if label != testing_data[i,-1]:
-            error[i] = 1/number_rows_testing
-        
-    return alpha, error
+                w += training_data[i,-1]*training_data[i,0:number_cols-1]
+                w0 += training_data[i,-1]
+                test = 0
+        iteration += 1
+    print(iteration)
     
-def compute_kernel(data): 
-    # TO IMPROVE: Implement the kernel trick.
-    kernel = lambda x,idx: x[0:len(x)-1]
-    return kernel
+    # Testing: 
+    error = []
+    for i in range(number_rows_testing):
+        label = np.sign(w @ testing_data[i,0:number_cols-1] + w0)
+        error.append(1/number_rows_testing*float(label != testing_data[i,-1]))
+        
+    return w0, w, error

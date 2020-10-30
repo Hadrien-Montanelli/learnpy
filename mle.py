@@ -28,7 +28,7 @@ def mle(data, model):
     if len(data.shape) == 1:
         dimension = 1
     else:
-        dimension = min(data.shape)
+        dimension = len(data[0])
     
     # To IMPROVE: implement algorithm for higher dimensions.
     # One-dimensional case.
