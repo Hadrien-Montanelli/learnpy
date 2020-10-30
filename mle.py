@@ -30,6 +30,7 @@ def mle(data, model):
     else:
         dimension = min(data.shape)
     
+    # To IMPROVE: implement algorithm for higher dimensions.
     # One-dimensional case.
     if dimension == 1:
         if model == 'normal':

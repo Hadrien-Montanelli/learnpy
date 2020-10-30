@@ -50,6 +50,6 @@ def knns(training_data, testing_data, k):
     return error
     
 def compute_distance(training_data_0, training_data_1): 
-    # TO IMPROVE: use BFGS to find the distance that separates labels best.
+    # TO IMPROVE: use BFGS to find the distance that best separates the data.
     dist = lambda x,y: LA.norm(x-y)
     return dist

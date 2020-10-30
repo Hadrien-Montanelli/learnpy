@@ -45,6 +45,7 @@ def mle_classifier(training_data, testing_data, prior, model):
     proba_1 = []
     for k in range(number_rows_testing):
         
+        # To IMPROVE: implement algorithm for higher dimensions.
         # One-dimensional case:
         if dimension == 1:
             p_0 = randvar_0.pdf(testing_data[k,0])*prior[0]
