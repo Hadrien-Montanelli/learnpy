@@ -9,7 +9,13 @@ import numpy as np
 from numpy import linalg as LA
 
 def kmeans(data, k):
-    """Return k clusters of data using the k-means algorithm."""
+    """Return k clusters of data using the k-means algorithm.
+    
+    Example:
+        
+        
+    See also the 'test_kmeans' file.
+    """
     # Get dimension:
     number_rows = len(data)
     

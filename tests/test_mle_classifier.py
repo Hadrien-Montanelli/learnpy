@@ -18,8 +18,8 @@ get_ipython().magic('clear')
 get_ipython().magic('reset -f')
 
 # Fit the following data (in cm) with a normal distribution & MLE:
-training_data = csv_to_array('../data/heights_training.csv')
-testing_data = csv_to_array('../data/heights_testing.csv')
+training_data = csv_to_array('../dataset/heights_training.csv')
+testing_data = csv_to_array('../dataset/heights_testing.csv')
 prior = np.array([0.5, 0.5])
 output = mle_classifier(training_data, testing_data, prior, 'normal')
 

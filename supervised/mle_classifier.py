@@ -10,13 +10,13 @@ from mle import mle
 
 def mle_classifier(training_data, testing_data, prior, model):
     """ 
-    Use a Maximum Likelihood Estimator-based learning algorithm.
+    Use maximum likelihood estimation for binary classification.
     
     The first columns of the training and testing data represent the data as 
     numpy arrays, while the last colum represents the label (0 or 1). The data
     can be 1D or 2D. Models include 'normal'.
     
-    For example, with 1D data:
+    For example, with 2D data:
         
         import numpy as np
         from mle_classifier import mle_classifier

@@ -18,8 +18,8 @@ get_ipython().magic('clear')
 get_ipython().magic('reset -f')
 
 # Use the Perceptron algorithm on the following data (in [cm, kg]):
-training_data = csv_to_array('../data/heights_weights_training.csv')
-testing_data = csv_to_array('../data/heights_weights_testing.csv')
+training_data = csv_to_array('../dataset/heights_weights_training.csv')
+testing_data = csv_to_array('../dataset/heights_weights_testing.csv')
 training_data[:,1] = training_data[:,1]
 testing_data[:,1] = testing_data[:,1]
 output = perceptron(training_data, testing_data)

@@ -5,19 +5,16 @@ Created on Fri Oct 23 16:06:00 2020
 
 @author: montanelli
 """
+# Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
+sys.path.append('../unsupervised')
+sys.path.append('../misc')
 from kmeans import kmeans
 from utilities import csv_to_array
 import matplotlib.pyplot as plt
 
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
-
 # Use k-means:
-data = csv_to_array('../data/heights_weights_training.csv')
+data = csv_to_array('../dataset/heights_weights_training.csv')
 clusters = kmeans(data[:,0:2], 2)
 print(clusters)
 number_rows = len(data)

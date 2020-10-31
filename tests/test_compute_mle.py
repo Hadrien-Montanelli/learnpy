@@ -5,27 +5,23 @@ Created on Sun Oct 18 17:56:46 2020
 
 @author: montanelli
 """
+# Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
-import matplotlib.pyplot as plt
+sys.path.append('../misc')
+from compute_mle import compute_mle
 import numpy as np
-from mle import mle
-
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
+import matplotlib.pyplot as plt
 
 # Fit the following data (in cm) with a normal distribution & MLE:
 data = np.array([170, 172, 180, 169, 175])
-normal_mle = mle(data, 'normal')
+normal_mle = compute_mle(data, 'normal')
 normal_mle.display()
 normal_mle.plot()
 plt.plot(data, np.vectorize(normal_mle.pdf)(data), '.k')
 
 # Fit the following data (in [cm, kg]) with a normal distribution & MLE:
 data = np.array([[170,80], [172,90], [180, 68], [169, 77], [175, 100]])
-normal_mle = mle(data, 'normal')
+normal_mle = compute_mle(data, 'normal')
 normal_mle.display()
 normal_mle.plot()
 ax = plt.gca(projection='3d')

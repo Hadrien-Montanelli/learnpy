@@ -11,10 +11,16 @@ from scipy.optimize import LinearConstraint
 
 def svm(training_data, testing_data):
     """
-    Use the support vector machines to classify data.
+    Use support vector machines for binary classification.
     
     The first columns of the training and testing data represent the data as 
     numpy arrays, while the last colum represents the label (0 or 1).
+    
+    Example:
+        
+        
+        
+        
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)

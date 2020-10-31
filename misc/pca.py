@@ -9,7 +9,10 @@ import numpy as np
 from numpy import linalg as LA
 
 def pca(data):
-    """Return the principal components of data."""
+    """Return the principal components of data.
+    
+    
+    """
     # Get dimensions:
     number_rows = len(data)
     number_cols = len(data[0])

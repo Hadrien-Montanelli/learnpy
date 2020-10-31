@@ -10,18 +10,19 @@ from math import exp, sqrt, pi
 from RandVar import RandVar
 from RandVar2 import RandVar2
 
-def mle(data, model):
+def compute_mle(data, model):
     """ 
-    Fit the given data with a prescribed model using the maximum likelihood
-    estimation. The data can be 1D or 2D. Models include 'normal'.
+    Compute the maximum likelihood estimation for a prescribed model using the
+    data. The data can be 1D or 2D. Models include 'normal'.
     
-    For example, with 1D data:
+    For example, with 2D data:
+
+      data = np.array([[170, 80], [172, 90], [180,68], [169, 77], [175, 90]])
+      compute_mle(data, 'normal')
         
-        import numpy as np
-        from mle import mle
-        
-        data = np.array([170, 172, 180, 169, 175])
-        mle(data, 'normal')
+    See also the 'test_compute_mle' file.
+    
+    Copyright 2020 by Hadrien Montanelli.
     """
     # Get the number of data and the dimension:
     n = len(data)
