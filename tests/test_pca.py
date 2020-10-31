@@ -1,22 +1,17 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Thu Oct 22 17:22:50 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
+# Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
+sys.path.append('../misc')
 from pca import pca
 from utilities import list_to_array
 import csv
 import matplotlib.pyplot as plt
-
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
 
 # Load data:
 data = list(csv.reader(open('../dataset/crabs.csv')))
@@ -28,8 +23,8 @@ for row in data:
 X = list_to_array(data)
 
 # PCA:
-D,V = pca(X)
+D, V = pca(X)
 
 # Post-processing:
 Z = X @ V
-plt.plot(Z[:,1],Z[:,2], '.')
+plt.plot(Z[:,1], Z[:,2], '.')

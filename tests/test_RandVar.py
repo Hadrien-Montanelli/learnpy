@@ -3,19 +3,14 @@
 """
 Created on Fri Oct 16 17:58:00 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 # Imports:
 import sys
-sys.path.append('../')
+sys.path.append('../misc')
 from math import exp, sqrt, pi
-from IPython import get_ipython
 import numpy as np
 from RandVar import RandVar
-
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
 
 # Define X as a normal distribution:
 mean = 0.21

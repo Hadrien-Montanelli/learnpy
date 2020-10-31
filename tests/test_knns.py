@@ -3,31 +3,23 @@
 """
 Created on Sat Oct 24 17:05:25 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
+# Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
+sys.path.append('../supervised')
+sys.path.append('../misc')
 from knns import knns
 from utilities import csv_to_array
 
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
-
-# Use the k-NNs algorithm on the following data (in cm):
+# Classify the following data (in cm) with the k-NNs algorithm:
 training_data = csv_to_array('../dataset/heights_training.csv')
 testing_data = csv_to_array('../dataset/heights_testing.csv')
 output = knns(training_data, testing_data, 1)
-error = output
-print('Error (1D):', sum(error), '\n')
+print('Error (1D):', output, '\n')
 
-# Use the k-NNs algorithm on the following data (in [cm, kg]):
+# Classify the following data (in [cm, kg]) with the k-NNs algorithm:
 training_data = csv_to_array('../dataset/heights_weights_training.csv')
 testing_data = csv_to_array('../dataset/heights_weights_testing.csv')
 output = knns(training_data, testing_data, 1)
-
-# Post-processing:
-output = knns(training_data, testing_data, 1)
-error = output
-print('Error (2D):', sum(error), '\n')
+print('Error (2D):', output, '\n')

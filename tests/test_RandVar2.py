@@ -3,19 +3,14 @@
 """
 Created on Mon Oct 19 14:21:10 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 # Imports:
 import sys
-sys.path.append('../')
+sys.path.append('../misc')
 from math import exp, sqrt, pi
-from IPython import get_ipython
 import numpy as np
 from RandVar2 import RandVar2
-
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
 
 # Try normal distribution:
 left_x_bound = -5

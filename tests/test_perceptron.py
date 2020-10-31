@@ -3,21 +3,18 @@
 """
 Created on Sun Oct 25 12:37:39 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
+# Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
+sys.path.append('../supervised')
+sys.path.append('../misc')
 from perceptron import perceptron
 from utilities import csv_to_array
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
-
-# Use the Perceptron algorithm on the following data (in [cm, kg]):
+# Classifity the following data (in [cm, kg]) with the perceptron algorithm:
 training_data = csv_to_array('../dataset/heights_weights_training.csv')
 testing_data = csv_to_array('../dataset/heights_weights_testing.csv')
 training_data[:,1] = training_data[:,1]
@@ -44,4 +41,4 @@ w = output[1]
 w0 = output[0]
 xx = np.linspace(np.min(testing_data[:,0]), np.max(testing_data[:,0]), 100)
 plt.plot(xx, -w[0]/w[1]*xx - w0/w[1], 'k')
-print([w0,w])
+print([w0, w])

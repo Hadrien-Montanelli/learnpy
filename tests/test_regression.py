@@ -3,21 +3,16 @@
 """
 Created on Mon Oct 19 14:21:10 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 # Imports:
 import sys
-sys.path.append('../')
-from IPython import get_ipython
+sys.path.append('../misc')
 import numpy as np
 import matplotlib.pyplot as plt
 from regression import regression
 from pylab import meshgrid 
 from matplotlib import cm
-
-# Clear workspace:
-get_ipython().magic('clear')
-get_ipython().magic('reset -f')
 
 # Try linear model with noise in 1D:
 np.random.seed(2)
@@ -25,9 +20,9 @@ n = 100
 x = np.linspace(-1, 1, 100)
 y = 2*x + 6 + 5e-1*np.random.randn(n)
 plt.plot(x, y, '.r')
-beta = regression(x, y, 'linear')
-print(beta)
-plt.plot(x, beta[0] + beta[1]*x, 'k')
+alpha, beta = regression(x, y, 'linear')
+print([alpha, beta])
+plt.plot(x, alpha + beta*x, 'k')
 
 # Try linear model with noise in 2D:
 n = 10
@@ -44,8 +39,8 @@ fig = plt.figure()
 ax = plt.gca(projection='3d')
 for k in range(x.shape[0]):
     ax.scatter(x[k,0], x[k,1], y[k], c='r')   
-beta = regression(x, y, 'linear')
-print(beta)
+alpha, beta = regression(x, y, 'linear')
+print([alpha, beta])
 X_1, X_2 = meshgrid(x[:,0], x[:,1])
-Y = beta[0] + beta[1]*X_1 + beta[2]*X_2
+Y = alpha + beta[0]*X_1 + beta[1]*X_2
 surf = ax.plot_surface(X_1, X_2, Y, cmap = cm.binary, alpha=0.2)
