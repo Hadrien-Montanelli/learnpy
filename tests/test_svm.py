@@ -8,7 +8,7 @@ Created on Sun Oct 25 12:37:39 2020
 import sys
 sys.path.append('../')
 from IPython import get_ipython
-from perceptron import perceptron
+from svm import svm
 from utilities import csv_to_array
 import matplotlib.pyplot as plt
 import numpy as np
@@ -17,12 +17,12 @@ import numpy as np
 get_ipython().magic('clear')
 get_ipython().magic('reset -f')
 
-# Use the Perceptron algorithm on the following data (in [cm, kg]):
+# Use SVMs on the following data (in [cm, kg]):
 training_data = csv_to_array('../data/heights_weights_training.csv')
 testing_data = csv_to_array('../data/heights_weights_testing.csv')
 training_data[:,1] = training_data[:,1]
 testing_data[:,1] = testing_data[:,1]
-output = perceptron(training_data, testing_data)
+output = svm(training_data, testing_data)
 number_rows = len(training_data)
 fig = plt.figure()
 for i in range(number_rows):

@@ -27,7 +27,6 @@ def perceptron(training_data, testing_data):
 
     # Training:
     test = 0
-    iteration = 0
     w0 = 0
     w = np.zeros(number_cols-1)
     while test == 0:
@@ -38,8 +37,6 @@ def perceptron(training_data, testing_data):
                 w += training_data[i,-1]*training_data[i,0:number_cols-1]
                 w0 += training_data[i,-1]
                 test = 0
-        iteration += 1
-    print(iteration)
     
     # Testing: 
     error = []
