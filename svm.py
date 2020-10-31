@@ -41,7 +41,7 @@ def svm(training_data, testing_data):
     res = minimize(func, w, method='trust-constr',
                    jac=func_grad, hess=func_hess, 
                    constraints = linear_constraint,
-                   options={'xtol': 1e-8, 'disp': False})
+                   options={'xtol': 1e-8, 'disp': True})
     w = res.x
     w0 = w[-1]
     w = w[:-1]
@@ -64,7 +64,6 @@ def func_grad(w):
     return grad
 
 def func_hess(w):
-    hess = np.ones([len(w), len(w)])
-    hess[:, -1] = 0
-    hess[-1, :] = 0
+    hess = np.eye(len(w))
+    hess[-1,-1] = 0
     return hess
