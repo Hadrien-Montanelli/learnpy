@@ -3,7 +3,7 @@
 """
 Created on Sun Oct 18 17:57:38 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 from math import exp, sqrt, pi
@@ -12,17 +12,33 @@ from RandVar2 import RandVar2
 
 def compute_mle(data, model):
     """ 
-    Compute the maximum likelihood estimation for a prescribed model using the
-    data. The data can be 1D or 2D. Models include 'normal'.
+    Compute the maximum likelihood estimate of a model using some data.
     
-    For example, with 2D data:
-
-      data = np.array([[170, 80], [172, 90], [180,68], [169, 77], [175, 90]])
-      compute_mle(data, 'normal')
+    Inputs
+    ------
+    data : numpy array
+        The data stored as a NxD matrix for N observations in dimension D. 
+        Only 1D and 2D data are supported.
         
-    See also the 'test_compute_mle' file.
+    model : str
+        The model for the probability distribution. Only 'normal' is 
+        supported.
     
-    Copyright 2020 by Hadrien Montanelli.
+    Output
+    ------
+    The output is a RandVar (1D) or RandVar2 (2D). See the documentation for
+    RandVar and RandVar2 for details.
+    
+    Example
+    -------
+    This is an example with 2D data.
+    
+        data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
+        output = compute_mle(data, 'normal')
+        output.plot()  
+        output.display()
+      
+    See also the 'test_compute_mle' file.
     """
     # Get the number of data and the dimension:
     n = len(data)
@@ -31,7 +47,8 @@ def compute_mle(data, model):
     else:
         dimension = len(data[0])
     
-    # To IMPROVE: implement algorithm for higher dimensions.
+    # To IMPROVE (1): implement the algorithm for higher dimensions.
+    # To IMPROVE (2): add more probability models.
     # One-dimensional case.
     if dimension == 1:
         if model == 'normal':

@@ -3,7 +3,7 @@
 """
 Created on Sat Oct 24 16:34:15 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 import csv

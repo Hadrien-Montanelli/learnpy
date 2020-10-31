@@ -3,17 +3,34 @@
 """
 Created on Fri Oct 23 16:05:24 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 from numpy import linalg as LA
 
 def kmeans(data, k):
-    """Return k clusters of data using the k-means algorithm.
+    """Return k clusters in data using the k-means algorithm.
     
-    Example:
+    Inputs
+    ------
+    data : numpy array
+        The data stored as a NxD matrix for N observations in dimension D. 
         
-        
+    k : int
+        The number of clusters to find.
+    
+    Output
+    ------
+    The output is a list containing k lists of indicdes for the k clusters.
+
+    Example
+    -------
+    This is an example with 2D data.
+
+        data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
+        output = kmeans(data, 2)
+        print(output)
+      
     See also the 'test_kmeans' file.
     """
     # Get dimension:

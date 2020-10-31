@@ -3,7 +3,7 @@
 """
 Created on Mon Oct 19 14:13:13 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 import scipy.integrate as intg

@@ -3,16 +3,39 @@
 """
 Created on Sun Oct 25 12:36:48 2020
 
-@author: montanelli
+Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 
 def perceptron(training_data, testing_data):
     """
-    Use the perceptron algorithm to classify data.
+    Use the perceptron algorithm for binary classification.
     
-    The first columns of the training and testing data represent the data as 
-    numpy arrays, while the last colum represents the label (0 or 1).
+    Inputs
+    ------
+    training_data : numpy array
+        The training data stored as a Nx(D+1) matrix for N observations in
+        dimension D. The last column represents the label (0 or 1).
+        
+    testing_data : numpy_array
+        The testing data stored as a Nx(D+1) matrix for N observations in 
+        dimension D. The last column represents the label (0 or 1).
+    
+    Outputs
+    -------
+    The first output is the bias while the second output is the rest of the
+    weights. The third output is the error on the testing data.
+
+    Example
+    -------
+    This is an example with 2D data.
+
+        training_data = np.array([[160, 60, 0], [172, 90, 1], [180, 90, 1]])
+        testing_data = np.array([[165, 66, 0], [176, 86, 1], [189, 99, 1]])
+        output = perceptron(training_data, testing_data)
+        print(output)
+      
+    See also the 'test_perceptron' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)
