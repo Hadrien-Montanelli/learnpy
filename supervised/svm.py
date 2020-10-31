@@ -25,8 +25,8 @@ def svm(training_data, testing_data):
     
     Outputs
     -------
-    The first output is the bias w_0 while the second output is the rest of 
-    the weights w. The third output is the error on the testing data.
+    The first output is the bias while the second output is the rest of the
+    weights. The third output is the error on the testing data.
 
     Example
     -------
@@ -64,7 +64,7 @@ def svm(training_data, testing_data):
     res = minimize(func, w, method='trust-constr',
                    jac=func_grad, hess=func_hess, 
                    constraints = linear_constraint,
-                   options={'xtol': 1e-8, 'disp': True})
+                   options={'xtol': 1e-8, 'disp': False})
     w = res.x
     w0 = w[-1]
     w = w[:-1]
