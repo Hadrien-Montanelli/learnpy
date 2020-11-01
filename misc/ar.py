@@ -6,7 +6,6 @@ Created on Sun Nov  1 14:27:18 2020
 Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
-from regression import regression
 
 def ar(data, p):
     '''Autoregression AR(p) of data.
@@ -14,35 +13,36 @@ def ar(data, p):
     Inputs
     ------
     data : numpy array
+        A time series as a Nx1 vector for N observations.
         
     p : int
+        Parameter in the AR(p) model.
     
     Outputs
     -------
+    The first output is the bias while the second output is the rest of the 
+    model parameters.
     
     Example
     -------
+        x = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
+        output = ar(x, 2)
+        print(output)
 
     See also the test_ar file.
     '''
-    
-    if p == 1:
-        # TO IMPROVE: implement p=1 case.
-        raise ValueError("The ar algorithm doesn't support p=1 for now.")
-        
-    else:
-        # Assemble the autoregression matrix:
-        n = len(data)
-        y = np.zeros(n-1)
-        y = data[p:]
-        x = np.zeros([n-1, p])
-        for k in range(n-1):
-            for i in range(p):
-                if i <= k:
-                    x[k, i] = data[k-i]
-        x = x[p-1:, :]
+    # Assemble the autoregression matrix:
+    n = len(data)
+    y = data[p:]
+    x = np.zeros([n-1, p+1])
+    for k in range(n-1):
+        x[k, 0] = 1
+        for i in range(1, p+1):
+            if i - 1 <= k:
+                x[k, i] = data[k-i+1]
+    x = x[p-1:, :]
 
-        # Call the regression method:
-        phi_0, phi = regression(x, y, 'linear')
-
-    return phi_0, phi
+    # Least squares:
+    phi = np.linalg.inv(np.transpose(x) @ x) @ np.transpose(x) @ y
+ 
+    return phi[0], phi[1:]

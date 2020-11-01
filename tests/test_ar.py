@@ -8,35 +8,33 @@ Copyright 2020 by Hadrien Montanelli.
 # Imports:
 import sys
 sys.path.append('../misc')
-import numpy as np
+from utilities import csv_to_array
 import matplotlib.pyplot as plt
+import numpy as np
 from ar import ar
-from math import sqrt
 
-# Example with p=2:
-np.random.seed(2)
-n = 100
+# Test AR(1):
+data = csv_to_array('../dataset/time_series_ar1.csv')
+plt.plot(data, '.-')
+p = 1
+alpha, beta = ar(data, p)
+print([alpha, beta])
+prediction = np.zeros(len(data))
+prediction[0] = data[0]
+for k in range(len(data)-1):
+    prediction[k+1] = alpha + beta[0]*data[k]
+plt.plot(prediction, '.-')
+
+# Test AR(2):
+data = csv_to_array('../dataset/time_series_ar2.csv')
+plt.figure()
+plt.plot(data, '.-')
 p = 2
-x = np.zeros(n)
-phi_0 = 1
-phi_1 = 0.9
-phi_2 = -0.8
-x[0] = phi_0
-x[1] = phi_0 + phi_1*x[0]
-var = 1e-2
-for k in range(n-2):
-    x[k+2] = phi_0 + phi_1*x[k+1] + phi_2*x[k]
-x = x + sqrt(var)*np.random.randn(n)
-plt.plot(x, '.-r')
-
-# Compute AR(p):
-alpha, beta = ar(x, p)
-print(alpha, beta)
-
-# Plot results:
-xx = np.zeros(n)
-xx[0] = x[0]
-xx[1] = xx[0]
-for k in range(n-2):
-    xx[k+2] = alpha + beta[0]*xx[k+1] + beta[1]*xx[k]
-plt.plot(xx, '.-b')
+alpha, beta = ar(data, p)
+print([alpha, beta])
+prediction = np.zeros(len(data))
+prediction[0] = data[0]
+prediction[1] = data[1]
+for k in range(len(data)-2):
+    prediction[k+2] = alpha + beta[0]*data[k+1] + beta[1]*data[k]
+plt.plot(prediction, '.-')
