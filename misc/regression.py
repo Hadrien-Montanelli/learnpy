@@ -61,7 +61,6 @@ def regression(x, y, model):
             z = np.zeros([n, dimension + 1])
             for i in range(n):
                 z[i, 0] = 1 # bias
-                z[i, 1] = x[i, 0]
-                z[i, 2] = x[i, 1]
+                z[i, 1:] = x[i, :]
             beta = np.linalg.inv(np.transpose(z) @ z) @ np.transpose(z) @ y
             return beta[0], beta[1:]
