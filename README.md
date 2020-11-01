@@ -12,7 +12,8 @@ Algorithms for **unsupervised** learning include:
 
 Also included:
 - princpal componenent analysis (`pca` function);
-- regression (`regression` function).
+- regression (`regression` function);
+- autoregression (`ar` function).
 
 Any comment or question, send an email to: hadrien.montanelli@gmail.com
 

@@ -48,7 +48,7 @@ def regression(x, y, model):
     # TO IMPROVE: add logistic regression.
     if model == 'linear':
         
-        # One-dimensional case.
+        # One-dimensional case:
         if dimension == 1:
             x_bar = 1/n*sum(x)
             y_bar = 1/n*sum(y)
@@ -56,11 +56,12 @@ def regression(x, y, model):
             alpha = y_bar - beta*x_bar
             return alpha, beta
             
-        # Higher dimensions.
+        # Higher dimensions:
         else:
             z = np.zeros([n, dimension + 1])
             for i in range(n):
                 z[i, 0] = 1 # bias
                 z[i, 1:] = x[i, :]
+
             beta = np.linalg.inv(np.transpose(z) @ z) @ np.transpose(z) @ y
             return beta[0], beta[1:]

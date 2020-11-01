@@ -49,7 +49,7 @@ def compute_mle(data, model):
     
     # To IMPROVE (1): implement the algorithm for higher dimensions.
     # To IMPROVE (2): add more probability models.
-    # One-dimensional case.
+    # One-dimensional case:
     if dimension == 1:
         if model == 'normal':
             mean = 1/n*sum(data)
@@ -61,7 +61,7 @@ def compute_mle(data, model):
             randvar = RandVar(pdf, domain)
         return randvar
     
-    # Two-dimensional case.
+    # Two-dimensional case:
     if dimension == 2:
         if model == 'normal':
             mean_x = 1/n*sum(data)[0]
