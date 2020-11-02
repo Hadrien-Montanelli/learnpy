@@ -14,27 +14,27 @@ import numpy as np
 from ar import ar
 
 # Test AR(1):
-data = csv_to_array('../dataset/time_series_ar1.csv')
-plt.plot(data, '.-')
+series = csv_to_array('../dataset/time_series_ar1.csv')
+plt.plot(series, '.-')
 p = 1
-alpha, beta = ar(data, p)
+alpha, beta = ar(series, p)
 print([alpha, beta])
-prediction = np.zeros(len(data))
-prediction[0] = data[0]
-for k in range(len(data)-1):
-    prediction[k+1] = alpha + beta[0]*data[k]
+prediction = np.zeros(len(series))
+prediction[0] = series[0]
+for k in range(len(series)-1):
+    prediction[k+1] = alpha + beta[0]*series[k]
 plt.plot(prediction, '.-')
 
 # Test AR(2):
-data = csv_to_array('../dataset/time_series_ar2.csv')
+series = csv_to_array('../dataset/time_series_ar2.csv')
 plt.figure()
-plt.plot(data, '.-')
+plt.plot(series, '.-')
 p = 2
-alpha, beta = ar(data, p)
+alpha, beta = ar(series, p)
 print([alpha, beta])
-prediction = np.zeros(len(data))
-prediction[0] = data[0]
-prediction[1] = data[1]
-for k in range(len(data)-2):
-    prediction[k+2] = alpha + beta[0]*data[k+1] + beta[1]*data[k]
+prediction = np.zeros(len(series))
+prediction[0] = series[0]
+prediction[1] = series[1]
+for k in range(len(series)-2):
+    prediction[k+2] = alpha + beta[0]*series[k+1] + beta[1]*series[k]
 plt.plot(prediction, '.-')

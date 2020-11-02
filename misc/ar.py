@@ -7,13 +7,13 @@ Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 
-def ar(data, p):
+def ar(series, p):
     '''Autoregression AR(p) of data.
     
     Inputs
     ------
-    data : numpy array
-        A time series as a Nx1 vector for N observations.
+    series : numpy array
+        A time series stored as a Tx1 vector for T observations.
         
     p : int
         Parameter in the AR(p) model.
@@ -25,21 +25,21 @@ def ar(data, p):
     
     Example
     -------
-        x = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
-        output = ar(x, 2)
+        x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
+        output = ar(x_t, 2)
         print(output)
 
-    See also the test_ar file.
+    See also the 'test_ar' file.
     '''
     # Assemble the autoregression matrix:
-    n = len(data)
-    y = data[p:]
-    x = np.zeros([n-1, p+1])
-    for k in range(n-1):
-        x[k, 0] = 1
+    T = len(series)
+    y = series[p:]
+    x = np.zeros([T-1, p+1])
+    for t in range(T-1):
+        x[t, 0] = 1
         for i in range(1, p+1):
-            if i - 1 <= k:
-                x[k, i] = data[k-i+1]
+            if i - 1 <= t:
+                x[t, i] = series[t-i+1]
     x = x[p-1:, :]
 
     # Least squares:

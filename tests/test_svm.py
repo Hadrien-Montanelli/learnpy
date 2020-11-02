@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Classifity the following data (in [cm, kg]) with the SVMs algorithm:
-training_data = csv_to_array('../dataset/heights_weights_training.csv')
-testing_data = csv_to_array('../dataset/heights_weights_testing.csv')
+training_data = csv_to_array('../dataset/2d_training.csv')
+testing_data = csv_to_array('../dataset/2d_testing.csv')
 training_data[:,1] = training_data[:,1]
 testing_data[:,1] = testing_data[:,1]
 output = svm(training_data, testing_data)

@@ -14,7 +14,7 @@ from utilities import csv_to_array
 import matplotlib.pyplot as plt
 
 # Find clusters on the following data (in [cm, kg]) with k-means algorithm:
-data = csv_to_array('../dataset/heights_weights_training.csv')
+data = csv_to_array('../dataset/2d_training.csv')
 clusters = kmeans(data[:,0:2], 2)
 print(clusters)
 number_rows = len(data)

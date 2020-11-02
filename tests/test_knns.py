@@ -13,13 +13,13 @@ from knns import knns
 from utilities import csv_to_array
 
 # Classify the following data (in cm) with the k-NNs algorithm:
-training_data = csv_to_array('../dataset/heights_training.csv')
-testing_data = csv_to_array('../dataset/heights_testing.csv')
+training_data = csv_to_array('../dataset/1d_training.csv')
+testing_data = csv_to_array('../dataset/1d_testing.csv')
 output = knns(training_data, testing_data, 1)
 print('Error (1D):', output, '\n')
 
 # Classify the following data (in [cm, kg]) with the k-NNs algorithm:
-training_data = csv_to_array('../dataset/heights_weights_training.csv')
-testing_data = csv_to_array('../dataset/heights_weights_testing.csv')
+training_data = csv_to_array('../dataset/2d_training.csv')
+testing_data = csv_to_array('../dataset/2d_testing.csv')
 output = knns(training_data, testing_data, 1)
 print('Error (2D):', output, '\n')
