@@ -32,14 +32,11 @@ def pautocorr(series):
     sample_pacf = np.zeros(T)
     sample_pacf[0] = 1
     sample_acf = autocorr(series)
-    sample_mean = 1/T*sum(series)
-    sample_var = 1/T*sum((series - sample_mean)**2)
     for h in range(1, T):
         gamma = np.zeros([h, h])
         for i in range(h):
             for j in range(h):
-                gamma[i,j] = sample_var*sample_acf[i-j]
+                gamma[i,j] = sample_acf[i-j]
         sample_pacf[h] = (np.linalg.inv(gamma) @ sample_acf[1:h+1])[-1]
-        sample_pacf[h] *= sample_var
         
     return sample_pacf
