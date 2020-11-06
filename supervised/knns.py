@@ -37,7 +37,7 @@ def knns(training_data, testing_data, k):
         output = knns(training_data, testing_data, 1)
         print(output)
       
-    See also the 'test_knns' file.
+    See also the 'example_knns' file.
     """
     # TO IMPROVE: the following implements k=1, extend to k>2.
     if k != 1:

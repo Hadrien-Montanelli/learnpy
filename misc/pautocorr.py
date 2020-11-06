@@ -26,7 +26,7 @@ def pautocorr(series):
         output = pautocorr(x_t)
         print(output)
         
-    See also the 'test_pautocorr' file.
+    See also the 'example_pautocorr' file.
     '''
     T = len(series)
     sample_pacf = np.zeros(T)

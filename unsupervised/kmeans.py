@@ -31,7 +31,7 @@ def kmeans(data, k):
         output = kmeans(data, 2)
         print(output)
       
-    See also the 'test_kmeans' file.
+    See also the 'example_kmeans' file.
     """
     # Get dimension:
     number_rows = len(data)

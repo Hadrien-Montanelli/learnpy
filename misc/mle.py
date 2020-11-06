@@ -10,7 +10,7 @@ from math import exp, sqrt, pi
 from RandVar import RandVar
 from RandVar2 import RandVar2
 
-def compute_mle(data, model):
+def mle(data, model):
     """ 
     Compute the maximum likelihood estimate of a model using some data.
     
@@ -34,11 +34,11 @@ def compute_mle(data, model):
     This is an example with 2D data.
     
         data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
-        output = compute_mle(data, 'normal')
+        output = mle(data, 'normal')
         output.plot()  
         output.display()
       
-    See also the 'test_compute_mle' file.
+    See also the 'example_mle' file.
     """
     # Get the number of data and the dimension:
     n = len(data)

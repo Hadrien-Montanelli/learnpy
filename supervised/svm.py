@@ -37,7 +37,7 @@ def svm(training_data, testing_data):
         output = svm(training_data, testing_data)
         print(output)
       
-    See also the 'test_svm' file.
+    See also the 'example_svm' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)

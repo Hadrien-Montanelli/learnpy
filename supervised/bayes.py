@@ -7,9 +7,9 @@ Copyright 2020 by Hadrien Montanelli.
 """
 import sys
 sys.path.append('../misc')
-from compute_mle import compute_mle
+from mle import mle
 
-def mle(training_data, testing_data, prior, model):
+def bayes(training_data, testing_data, prior, model):
     """
     Use the maximum likelihood estimation algorithm for binary classification.
     
@@ -46,12 +46,12 @@ def mle(training_data, testing_data, prior, model):
         training_data = np.array([[160, 0], [155, 0], [172, 1], [180, 1]])
         testing_data = np.array([[165, 0], [162, 0], [176, 1], [189, 1]])
         prior = np.array([1/2, 1/2])
-        output = mle(training_data, testing_data, prior, 'normal')
+        output = bayes(training_data, testing_data, prior, 'normal')
         output[0].plot()
         output[1].plot()
         print(output[2])
       
-    See also the 'test_mle' file.
+    See also the 'example_bayes' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)
@@ -63,8 +63,8 @@ def mle(training_data, testing_data, prior, model):
     training_data_1 = training_data[training_data[:,-1]==1][:,0:dimension]
     
     # Compute the MLE for training:
-    randvar_0 = compute_mle(training_data_0, model)
-    randvar_1 = compute_mle(training_data_1, model)
+    randvar_0 = mle(training_data_0, model)
+    randvar_1 = mle(training_data_1, model)
 
     # Testing:
     error = []

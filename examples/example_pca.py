@@ -25,6 +25,6 @@ X = list_to_array(data)
 # PCA:
 D, V = pca(X)
 
-# Post-processing:
+# Plot two principal components:
 Z = X @ V
 plt.plot(Z[:,1], Z[:,2], '.')

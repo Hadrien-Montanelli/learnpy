@@ -35,7 +35,7 @@ def perceptron(training_data, testing_data):
         output = perceptron(training_data, testing_data)
         print(output)
       
-    See also the 'test_perceptron' file.
+    See also the 'example_perceptron' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)

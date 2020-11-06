@@ -28,7 +28,7 @@ def pca(data):
         data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
         D, V = pca(data)
     
-    See also the 'test_pca' file.
+    See also the 'example_pca' file.
     
     """
     # Get dimensions:

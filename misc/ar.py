@@ -29,7 +29,7 @@ def ar(series, p):
         output = ar(x_t, 2)
         print(output)
 
-    See also the 'test_ar' file.
+    See also the 'example_ar' file.
     '''
     # Assemble the autoregression matrix:
     T = len(series)

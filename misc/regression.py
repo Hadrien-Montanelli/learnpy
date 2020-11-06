@@ -36,7 +36,7 @@ def regression(x, y, model):
         output = regression(x, y, 'linear')
         print(output)
     
-    See also the test_regression file.
+    See also the 'example_regression' file.
     '''
     # Get the number of data and the dimension:
     n = len(x)

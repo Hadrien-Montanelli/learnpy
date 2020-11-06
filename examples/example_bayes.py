@@ -9,7 +9,7 @@ Copyright 2020 by Hadrien Montanelli.
 import sys
 sys.path.append('../supervised')
 sys.path.append('../misc')
-from mle import mle
+from bayes import bayes
 from utilities import csv_to_array
 import numpy as np
 
@@ -17,7 +17,7 @@ import numpy as np
 training_data = csv_to_array('../dataset/1d_training.csv')
 testing_data = csv_to_array('../dataset/1d_testing.csv')
 prior = np.array([0.5, 0.5])
-output = mle(training_data, testing_data, prior, 'normal')
+output = bayes(training_data, testing_data, prior, 'normal')
 randvar_0 = output[0]
 randvar_1 = output[1]   
 error = output[2]   
@@ -29,7 +29,7 @@ randvar_1.plot('r')
 training_data = csv_to_array('../dataset/2d_training.csv')
 testing_data = csv_to_array('../dataset/2d_testing.csv')
 prior = np.array([0.5, 0.5])
-output = mle(training_data, testing_data, prior, 'normal')
+output = bayes(training_data, testing_data, prior, 'normal')
 randvar_0 = output[0]
 randvar_1 = output[1]
 error = output[2]   

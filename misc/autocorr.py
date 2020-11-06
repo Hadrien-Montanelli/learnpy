@@ -25,7 +25,7 @@ def autocorr(series):
         output = autocorr(x_t)
         print(output)
         
-    See also the 'test_autocorr' file.
+    See also the 'example_autocorr' file.
     '''
     T = len(series)
     sample_acf = np.zeros(T)
