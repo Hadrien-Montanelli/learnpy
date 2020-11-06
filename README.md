@@ -2,7 +2,7 @@
 Python package for supervised &amp; unsupervised learning, and times series.
 
 Algorithms for **supervised learning** include:
-- naive Bayes classifier (`bayes` function);
+- Bayes classifier (`bayes` function);
 - *k*-nearest neighbours (`knns` function);
 - perceptron algorithm (`perceptron` function);
 - support vector machines (`svm` function).

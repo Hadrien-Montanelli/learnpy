@@ -11,7 +11,7 @@ from mle import mle
 
 def bayes(training_data, testing_data, prior, model):
     """
-    Use the maximum likelihood estimation algorithm for binary classification.
+    Use a Bayes classifier for binary classification.
     
     Inputs
     ------
