@@ -19,7 +19,7 @@ Also included:
 - maximum likelihood esitmation (`mle` function);
 - Monte Carlo integration (`montecarlo` function);
 - princpal componenent analysis (`pca` function);
-- regression (`regression` function);
+- regression (`regression` function).
 
 The `examples` folder contains examples for each of these functions. 
 
