@@ -5,6 +5,7 @@ Algorithms for **supervised learning** include:
 - Bayes classifier (`bayes` function);
 - *k*-nearest neighbours (`knns` function);
 - perceptron algorithm (`perceptron` function);
+- kernalized perceptron algorithm (`kperceptron` function);
 - support vector machines (`svm` function).
 
 Algorithms for **unsupervised learning** include:
