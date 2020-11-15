@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Oct 25 12:36:48 2020
+Created on Sun Nov 15 11:45:47 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 
-def perceptron(training_data, testing_data):
+def kperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
     """
-    Use the perceptron algorithm for binary classification.
+    Use the kernelized perceptron algorithm for binary classification.
     
     Inputs
     ------
@@ -20,22 +20,16 @@ def perceptron(training_data, testing_data):
     testing_data : numpy_array
         The testing data stored as a Nx(D+1) matrix for N observations in 
         dimension D. The last column represents the label (0 or 1).
+        
+    kernel : lambda
+        The kernel.
     
     Outputs
     -------
     The first output is the bias while the second output is the rest of the
     weights. The third output is the error on the testing data.
-
-    Example
-    -------
-    This is an example with 2D data.
-
-        training_data = np.array([[160, 60, 0], [172, 90, 1], [180, 90, 1]])
-        testing_data = np.array([[165, 66, 0], [176, 86, 1], [189, 99, 1]])
-        output = perceptron(training_data, testing_data)
-        print(output)
       
-    See also the 'example_perceptron' file.
+    See the 'example_kperceptron' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)
@@ -50,25 +44,42 @@ def perceptron(training_data, testing_data):
 
     # Training:
     test = 0
-    w_0 = 0
-    w = np.zeros(number_cols-1)
+    alpha = np.zeros(number_rows_training)
     while test == 0:
         test = 1
         for i in range(number_rows_training):
+            label = 0
             x_i = training_data[i,0:number_cols-1]
             y_i = training_data[i,-1]
-            label = np.sign(w @ x_i + w_0)
-            if label != training_data[i,-1]:
-                w += y_i*x_i
-                w_0 += y_i
+            for j in range(number_rows_training):
+                x_j = training_data[j,0:number_cols-1]
+                y_j = training_data[j,-1]
+                label += alpha[j]*y_j*(kernel(x_j, x_i))
+            label = np.sign(label)
+            if label != y_i:
+                alpha[i] += 1
                 test = 0
     
     # Testing: 
     error = []
     for i in range(number_rows_testing):
+        label = 0
         x_i = testing_data[i,0:number_cols-1]
         y_i = testing_data[i, -1]
-        label = np.sign(w @ x_i + w_0)
+        for j in range(number_rows_training):
+            x_j = training_data[j,0:number_cols-1]
+            y_j = training_data[j,-1]
+            label += alpha[j]*y_j*(kernel(x_j, x_i))
+        label = np.sign(label)
         error.append(1/number_rows_testing*float(label != y_i))
-
+        
+    # Get the weights:
+    w_0 = 0
+    w = np.zeros(number_cols-1)
+    for i in range(number_rows_training):
+        x_i = training_data[i,0:number_cols-1]
+        y_i = training_data[i,-1]
+        w += alpha[i]*y_i*x_i
+        w_0 += alpha[i]*y_i
+        
     return w_0, w, error
