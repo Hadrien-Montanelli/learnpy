@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Get the data:
-N = 40
+N = 50
 training_data = np.zeros([N, 3])
 testing_data = np.zeros([N, 3])
 for i in range(N):
@@ -58,8 +58,5 @@ kernel = lambda x,y: (1 + x @ y)**2
 output = kperceptron(training_data, testing_data, kernel)
     
 # Print error and weights:
-error = output[2]
+error = output[1]
 print('Error:  ', sum(error))
-w = output[1]
-w_0 = output[0]
-print('Weights:', [w_0, w])

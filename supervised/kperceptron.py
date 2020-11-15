@@ -26,8 +26,8 @@ def kperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
     
     Outputs
     -------
-    The first output is the bias while the second output is the rest of the
-    weights. The third output is the error on the testing data.
+    The first output is the the vector of model parameters. The secnd output 
+    is the error on the testing data.
       
     See the 'example_kperceptron' file.
     """
@@ -73,13 +73,4 @@ def kperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
         label = np.sign(label)
         error.append(1/number_rows_testing*float(label != y_i))
         
-    # Get the weights:
-    w_0 = 0
-    w = np.zeros(number_cols-1)
-    for i in range(number_rows_training):
-        x_i = training_data[i,0:number_cols-1]
-        y_i = training_data[i,-1]
-        w += alpha[i]*y_i*x_i
-        w_0 += alpha[i]*y_i
-        
-    return w_0, w, error
+    return alpha, error
