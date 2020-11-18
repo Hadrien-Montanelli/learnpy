@@ -9,7 +9,7 @@ Copyright 2020 by Hadrien Montanelli.
 import sys
 sys.path.append('../supervised')
 sys.path.append('../misc')
-from kperceptron import kperceptron
+from kerperceptron import kerperceptron
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -55,7 +55,7 @@ for i in range(number_rows):
     
 # Classify the data with the kernelized perceptron algorithm:
 kernel = lambda x,y: (1 + x @ y)**2
-output = kperceptron(training_data, testing_data, kernel)
+output = kerperceptron(training_data, testing_data, kernel)
     
 # Print error and weights:
 error = output[1]

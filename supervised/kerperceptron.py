@@ -7,7 +7,7 @@ Copyright 2020 by Hadrien Montanelli.
 """
 import numpy as np
 
-def kperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
+def kerperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
     """
     Use the kernelized perceptron algorithm for binary classification.
     
@@ -29,7 +29,7 @@ def kperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
     The first output is the the vector of model parameters. The secnd output 
     is the error on the testing data.
       
-    See the 'example_kperceptron' file.
+    See the 'example_kerperceptron' file.
     """
     # Get dimensions:
     number_rows_testing = len(testing_data)
