@@ -24,3 +24,7 @@ normal_mle = mle(data, 'normal')
 normal_mle.display()
 normal_mle.plot()
 ax = plt.gca(projection='3d')
+
+# Compute MLE for the normal distribution and following data (in [cm, kg, IQ]):
+data = np.array([[170,80,100], [172,90,80], [180, 68, 90], [169, 77, 140]])
+normal_mle = mle(data, 'normal')
