@@ -11,19 +11,17 @@ from mle import mle
 
 def bayes(training_data, testing_data, prior, model):
     """
-    Use a Bayes classifier for binary classification.
+    Use a naive Bayes classifier for binary classification.
     
     Inputs
     ------
     training_data : numpy array
         The training data stored as a Nx(D+1) matrix for N observations in
-        dimension D. Only 1D and 2D data are supported. The last column 
-        represents the label (0 or 1).
+        dimension D. The last column represents the label (0 or 1).
         
     testing_data : numpy_array
         The testing data stored as a Nx(D+1) matrix for N observations in 
-        dimension D. Only 1D and 2D data are supported. The last column 
-        represents the label (0 or 1).
+        dimension D. The last column represents the label (0 or 1).
         
     prior : numpy array
         The prior probablilites stored as a 2x1 vector.
@@ -34,10 +32,9 @@ def bayes(training_data, testing_data, prior, model):
 
     Outputs
     -------
-    The first two outputs are a RandVar (1D) or RandVar2 (2D) that correspond 
-    to the probability models for the data labelled with 0 and 1. See the 
-    documentation for RandVar and RandVar2 for details. The third output is 
-    the error on the testing data.
+    The first two outputs are a RandVar that corresponds to the probability 
+    models for the data labelled with 0 and 1. See the documentation for 
+    RandVar for details. The third output is the error on the testing data.
     
     Example
     -------
@@ -62,26 +59,23 @@ def bayes(training_data, testing_data, prior, model):
     training_data_0 = training_data[training_data[:,-1]==0][:,0:dimension]
     training_data_1 = training_data[training_data[:,-1]==1][:,0:dimension]
     
-    # Compute the MLE for training:
-    randvar_0 = mle(training_data_0, model)
-    randvar_1 = mle(training_data_1, model)
-
+    # Compute the 1D MLEs for each feature and each label:
+    randvar = []
+    for j in range(dimension):
+        randvar_0 = mle(training_data_0[:,j], model)
+        randvar_1 = mle(training_data_1[:,j], model)
+        randvar.append([randvar_0, randvar_1])
+    
     # Testing:
     error = []
     for k in range(number_rows_testing):
-        
-        # One-dimensional case:
-        if dimension == 1:
-            p_0 = randvar_0.pdf(testing_data[k,0])*prior[0]
-            p_1 = randvar_1.pdf(testing_data[k,0])*prior[1]
-            
-        # Two-dimensional case:
-        if dimension == 2:
-            p_0 = randvar_0.pdf(testing_data[k,0],testing_data[k,1])*prior[0]
-            p_1 = randvar_1.pdf(testing_data[k,0],testing_data[k,1])*prior[1]
-            
+        p_0 = prior[0]
+        p_1 = prior[1]
+        for j in range(dimension):
+            p_0 *= randvar[j][0].pdf(testing_data[k,j])
+            p_1 *= randvar[j][1].pdf(testing_data[k,j])  
         label = float(p_0 < p_1)
         error.append(1/number_rows_testing*float(label != testing_data[k,-1]))
             
     # Outputs:
-    return randvar_0, randvar_1, sum(error)
+    return randvar, sum(error)

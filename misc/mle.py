@@ -51,7 +51,7 @@ def mle(data, model):
     if dimension == 1:
         if model == 'normal':
             mean = 1/n*sum(data)
-            var = 1/(n-1)*sum([(x - mean)**2 for x in data])
+            var = 1/n*sum([(x - mean)**2 for x in data])
             pdf = lambda x: 1/sqrt(2*pi*var)*exp(-1/(2*var)*(x-mean)**2)
             left_bound = min(data) - 3*sqrt(var)
             right_bound = max(data) + 3*sqrt(var)
