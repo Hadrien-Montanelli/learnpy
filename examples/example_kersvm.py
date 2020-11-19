@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Nov 15 11:45:24 2020
+Created on Thu Nov 19 18:11:15 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
@@ -9,7 +9,7 @@ Copyright 2020 by Hadrien Montanelli.
 import sys
 sys.path.append('../supervised')
 sys.path.append('../misc')
-from kerperceptron import kerperceptron
+from kersvm import kersvm
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -53,10 +53,10 @@ for i in range(number_rows):
         color = 'xb'
     plt.plot(testing_data[i,0],testing_data[i,1],color)
     
-# Classify the data with the kernel perceptron algorithm:
-kernel = lambda x,y: (1 + x @ y)**2
-output = kerperceptron(training_data, testing_data, kernel)
+# Classify the data with the kernel SVMs algorithm:
+kernel = lambda x,y: (x @ y)**2
+output = kersvm(training_data, testing_data, kernel)
     
 # Print error and weights:
-error = output[1]
+error = output[2]
 print('Error:  ', sum(error))

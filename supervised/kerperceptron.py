@@ -9,7 +9,7 @@ import numpy as np
 
 def kerperceptron(training_data, testing_data, kernel = lambda x,y: 1 + x @ y):
     """
-    Use the kernelized perceptron algorithm for binary classification.
+    Use the kernel perceptron algorithm for binary classification.
     
     Inputs
     ------

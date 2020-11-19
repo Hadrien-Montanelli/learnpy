@@ -61,10 +61,10 @@ def svm(training_data, testing_data):
     upper_bnd = [np.inf for _ in range(number_rows_training)]
     linear_constraint = LinearConstraint(constraint_mat, lower_bnd, upper_bnd)
     w = np.zeros(number_cols)
-    res = minimize(func, w, method='trust-constr',
-                   jac=func_grad, hess=func_hess, 
+    res = minimize(func, w, method = 'trust-constr',
+                   jac = func_grad, hess = func_hess, 
                    constraints = linear_constraint,
-                   options={'xtol': 1e-8, 'disp': False})
+                   options = {'xtol': 1e-8, 'disp': False})
     w = res.x
     w0 = w[-1]
     w = w[:-1]

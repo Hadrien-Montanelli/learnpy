@@ -17,8 +17,6 @@ import numpy as np
 # Get the data (in [cm, kg]):
 training_data = csv_to_array('../dataset/2d_training.csv')
 testing_data = csv_to_array('../dataset/2d_testing.csv')
-training_data[:,1] = training_data[:,1]
-testing_data[:,1] = testing_data[:,1]
 
 # Plot the training data:
 number_rows = len(training_data)
