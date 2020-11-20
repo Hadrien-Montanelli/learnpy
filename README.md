@@ -7,7 +7,8 @@ Algorithms for **supervised learning** include:
 - perceptron algorithm (`perceptron` function);
 - kernel perceptron algorithm (`kerperceptron` function);
 - support vector machines (`svm` function);
-- kernel support vector machines (`kersvm` function).
+- kernel support vector machines (`kersvm` function);
+- shallow neural networks (`shallow` function).
 
 Algorithms for **unsupervised learning** include:
 - *k*-means (`kmeans` function).
