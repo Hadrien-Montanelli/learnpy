@@ -5,6 +5,7 @@ Created on Tue Nov 10 13:18:53 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+# Standard library imports:
 import numpy as np
 
 def montecarlo(function, domain, N=1000):

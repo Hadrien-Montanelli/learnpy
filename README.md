@@ -3,9 +3,9 @@ Python package for supervised &amp; unsupervised learning, and times series.
 
 Algorithms for **supervised learning** include:
 - naive Bayes classifier (`bayes`);
-- *k*-nearest neighbours (`knns`);
-- perceptron algorithm (`perceptron`);
-- kernel perceptron algorithm (`kerperceptron`);
+- *k*-nearest neighbors (`knns`);
+- perceptron algorithm (`percep`);
+- kernel perceptron algorithm (`kerpercep`);
 - support vector machines (`svm`);
 - kernel support vector machines (`kersvm`);
 - shallow neural networks (`shallow`).
@@ -19,7 +19,6 @@ Algorithms for **time series** include:
 - partial autocorrelation computation (`pautocorr`).
 
 Also included:
-- maximum likelihood esitmation (`mle`);
 - Monte Carlo integration (`montecarlo`);
 - princpal componenent analysis (`pca`);
 - regression (`regression`).

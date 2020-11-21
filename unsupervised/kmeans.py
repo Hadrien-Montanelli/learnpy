@@ -5,6 +5,7 @@ Created on Fri Oct 23 16:05:24 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+# Standard library imports:
 import numpy as np
 from numpy import linalg as LA
 
@@ -37,7 +38,7 @@ def kmeans(data, k):
     number_rows = len(data)
     
     # Assign each observation to one of the clusters:
-    cluster_index = initialise_cluster_index(k, number_rows)
+    cluster_index = initialize_cluster_index(k, number_rows)
     
     # Iterate the following 2 steps until cluster assignments stop changing:
     test = 0
@@ -70,7 +71,7 @@ def compute_cluster_mean(data, cluster_index):
     cluster_mean = 1/number_rows*np.sum(data[cluster_index, :], 0)
     return cluster_mean
 
-def initialise_cluster_index(k, number_rows): 
+def initialize_cluster_index(k, number_rows): 
     # TO IMPROVE: do a random assignment.
     cluster_index = []
     for i in range(k-1):

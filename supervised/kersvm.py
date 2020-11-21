@@ -5,103 +5,123 @@ Created on Thu Nov 19 18:11:15 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+# Standard library imports:
 import numpy as np
-from scipy.optimize import minimize
 from scipy.optimize import Bounds
+from scipy.optimize import minimize
 
-def kersvm(training_data, testing_data, kernel):
+# Learnpy imports:
+from .classifier import classifier
+
+class kersvm(classifier):
     """
-    Use the kernel upport vector machines algorithm for binary classification.
-    
-    Inputs
-    ------
-    training_data : numpy array
-        The training data stored as a Nx(D+1) matrix for N observations in
-        dimension D. The last column represents the label (0 or 1).
-        
-    testing_data : numpy_array
-        The testing data stored as a Nx(D+1) matrix for N observations in 
-        dimension D. The last column represents the label (0 or 1).
-    
-    Outputs
-    -------
-    The first output is the bias while the second output is the rest of the
-    coefficients. The third output is the error on the testing data.
-      
-    See the 'example_kersvm' file.
+    Class for representing kernel support vector machines.
     """
-    # Get dimensions:
-    number_rows_testing = len(testing_data)
-    number_rows_training = len(training_data)
-    number_cols = len(testing_data[0])
-    
-    # Change labels {0,1} to {-1,1}:
-    training_data = np.array(training_data)
-    testing_data = np.array(testing_data)
-    training_data[:,-1] = 2*training_data[:,-1] - 1
-    testing_data[:,-1] = 2*testing_data[:,-1] - 1
-
-    # Training:
-    eq_cons = {'type': 'eq',
-                 'fun' : lambda  x: sum(x*training_data[:,-1]),
-                 'jac' : lambda x: training_data[:,-1]}
-    lower_bounds = [0 for _ in range(number_rows_training)]
-    upper_bounds = [np.inf for _ in range(number_rows_training)]
-    bounds = Bounds(lower_bounds, upper_bounds)
-    alpha = np.zeros(number_rows_testing)
-    res = minimize(func, alpha, args = (training_data, kernel), 
-                   method = 'SLSQP', jac = func_grad, bounds = bounds,
-                   constraints = eq_cons, 
-                   options = {'ftol': 1e-8, 'disp': False})
-    alpha = res.x
-    
-    # Get bias:
-    idx = np.argmax(alpha)
-    x_idx = training_data[idx,0:number_cols-1]
-    y_idx = training_data[idx,-1]
-    w0 = y_idx
-    for i in range(number_rows_training):
-        x_i = training_data[i,0:number_cols-1]
-        y_i = training_data[i,-1]
-        w0 -= alpha[i]*y_i*kernel(x_i,x_idx)
+    def __init__(self, n_input, n_train, kernel):
+        super().__init__(n_input, n_train)
+        self.kernel = kernel
         
-    # Testing: 
-    error = []
-    for i in range(number_rows_testing):
-        label = 0
-        x_i = testing_data[i,0:number_cols-1]
-        y_i = testing_data[i, -1]
-        for j in range(number_rows_training):
-            x_j = training_data[j,0:number_cols-1]
-            y_j = training_data[j,-1]
-            label += alpha[j]*y_j*(kernel(x_j, x_i))
-        label = np.sign(label + w0)
-        error.append(1/number_rows_testing*float(label != y_i))
+    def train(self, X, Y):
+        """
+        Train kernel support vector machines.
         
-    return w0, alpha, error
+        Inputs
+        ------
+        X : numpy array
+            The training data as a nxd array for n data in dimension d.
+        
+        Y : numpy array
+            The labels as an 1xn array. Labels are {0,1}.
+        """
+        # Get dimensions:
+        n = self.n_train
 
-def func(alpha, data, kernel):
-    num_rows = len(data)
-    num_cols = len(data[0])
-    aux = 0
-    for i in range(num_rows):
-        x_i = data[i,0:num_cols-1]
-        y_i = data[i,-1]
-        for j in range(num_rows):
-            x_j = data[j,0:num_cols-1]
-            y_j = data[j,-1]
-            aux += alpha[i]*alpha[j]*y_i*y_j*kernel(x_j, x_i)        
-    return -(sum(alpha) - 1/2*aux)
+        # Get the kernel:
+        K = self.kernel
 
-def func_grad(alpha, data, kernel):
-    num_rows = len(data)
-    num_cols = len(data[0])
-    grad = np.ones(num_rows)
-    for i in range(num_rows):
-        x_i = data[i,0:num_cols-1]
-        y_i = data[i,-1]
-        for j in range(num_rows):
-            x_j = data[j,0:num_cols-1]
-            y_j = data[j,-1]
-            grad[i] += -1/2*alpha[j]*y_i*y_j*kernel(x_j, x_i)
-    return -grad
+        # Change labels {0,1} to {-1,1}:
+        Y = 2*Y - 1
+        
+        # Initialize parameters:
+        alpha = np.zeros(n)
+           
+        # Cost function:
+        def func(alpha, X, Y, K):
+            n = len(X)
+            aux = 0
+            for i in range(n):
+                for j in range(n):
+                    aux += alpha[i]*alpha[j]*Y[i]*Y[j]*K(X[j,:], X[i,:])        
+            return -(sum(alpha) - 1/2*aux)
+        
+        # Gradient:
+        def func_grad(alpha, X, Y, K):
+            n = len(X)
+            grad = np.ones(n)
+            for i in range(n):
+                for j in range(n):
+                    grad[i] += -1/2*alpha[j]*Y[i]*Y[j]*K(X[j,:], X[i,:])        
+            return -grad
+    
+        # Optimization:
+        eq_cons = {'type': 'eq',
+                     'fun' : lambda alpha: sum(alpha*Y),
+                     'jac' : lambda alpha: Y}
+        lower_bounds = [0 for _ in range(n)]
+        upper_bounds = [np.inf for _ in range(n)]
+        bounds = Bounds(lower_bounds, upper_bounds)
+        res = minimize(func, alpha, args = (X, Y, K), 
+                       method = 'SLSQP', jac = func_grad, bounds = bounds,
+                       constraints = eq_cons, 
+                       options = {'ftol': 1e-8, 'disp': False})    
+            
+        # Get bias:
+        idx = np.argmax(alpha)
+        W0 = Y[idx]
+        for i in range(n):
+            W0 -= alpha[i]*Y[i]*K(X[i,:], X[idx,:])
+        
+        # Store parameters:
+        self.params['W0'] = W0
+        self.params['alpha'] = res.x
+        self.params['X_train'] = X
+        self.params['Y_train'] = Y
+
+    def classify(self, X):
+        """
+        Classify data.
+        
+        Inputs
+        ------
+        X : numpy array
+            The data to classify as a nxd array for n data in dimension d.
+            
+        Output
+        ------
+        Y_hat : numpy array
+            Predicted labels as a 1xn array. Labels are {0,1}.
+        """
+        # Get the dimenions:
+        n = self.n_train
+        m = len(X)
+        
+        # Get the parameters:
+        W0 = self.params['W0']
+        alpha = self.params['alpha']
+        X_train = self.params['X_train']
+        Y_train = self.params['Y_train']
+                
+        # Get the kernel:
+        K = self.kernel
+            
+        # Predict:
+        Y_hat = np.zeros(m)
+        for i in range(m):
+            for j in range(n):
+                Y_hat[i] += alpha[j]*Y_train[j]*K(X_train[j,:], X[i, :])
+            Y_hat[i] = np.sign(Y_hat[i] + W0)
+        
+        # Change labels {-1,1} to {0,1}:
+        Y_hat = 1/2*(Y_hat + 1)
+        
+        return Y_hat

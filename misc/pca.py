@@ -5,6 +5,7 @@ Created on Thu Oct 22 17:19:02 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+# Standard library imports:
 import numpy as np
 from numpy import linalg as LA
 
@@ -41,8 +42,8 @@ def pca(data):
     
     # Eigenvalue decomposition:
     if number_rows < number_cols:
-        D, V = LA.eig(1/(number_rows-1)*(data @ np.transpose(data)))
+        D, V = LA.eig(1/(number_rows-1)*(data @ data.T))
     else:
-        D, V = LA.eig(1/(number_rows-1)*(np.transpose(data) @ data))
+        D, V = LA.eig(1/(number_rows-1)*(data.T @ data))
         
     return D, V

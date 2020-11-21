@@ -5,6 +5,7 @@ Created on Fri Oct 30 17:36:47 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+# Standard library imports:
 import numpy as np
 
 def regression(x, y, model):
@@ -63,5 +64,5 @@ def regression(x, y, model):
                 z[i, 0] = 1 # bias
                 z[i, 1:] = x[i, :]
             
-            beta = np.linalg.inv(np.transpose(z) @ z) @ np.transpose(z) @ y
+            beta = np.linalg.inv(z.T @ z) @ z.T @ y
             return beta[0], beta[1:]

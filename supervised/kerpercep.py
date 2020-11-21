@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Oct 24 16:56:55 2020
+Created on Sun Nov 15 11:45:47 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
@@ -11,20 +11,17 @@ import numpy as np
 # Learnpy imports:
 from .classifier import classifier
 
-class knns(classifier):
+class kerpercep(classifier):
     """
-    Class for representing the k-nearest neighbors classifier.
+    Class for representing the kernel perceptron classifier.
     """
-    def __init__(self, n_input, n_train, n_neigbours):
+    def __init__(self, n_input, n_train, kernel):
         super().__init__(n_input, n_train)
-        # TO IMPROVE: the following implements k=1; extend to k>2.
-        if (n_neigbours != 1):
-            raise ValueError("The knns algorithm only supports k=1 for now.")
-        self.n_neigbours = n_neigbours
+        self.kernel = kernel
         
     def train(self, X, Y):
         """
-        Train the k-nearest neighbors classifier.
+        Train the kernel perceptron classifier.
         
         Inputs
         ------
@@ -34,17 +31,36 @@ class knns(classifier):
         Y : numpy array
             The labels as an 1xn array. Labels are {0,1}.
         """
-        # Get dimensions:
-        d = self.n_input
+        # Get dimension:
+        n = self.n_train
         
-        # TO IMPROVE: find the distance that best separates the training data.
-        W = np.ones([1, d])
+        # Get the kernel:
+        K = self.kernel
+
+        # Change labels {0,1} to {-1,1}:
+        Y = 2*Y - 1
         
+        # Initialize parameters:
+        alpha = np.zeros(n)
+           
+        # Main loop:
+        test = 0
+        while (test == 0):
+            test = 1
+            for i in range(n):
+                Y_hat = 0
+                for j in range(n):
+                    Y_hat += alpha[j]*Y[j]*K(X[j,:], X[i,:])
+                Y_hat = np.sign(Y_hat)
+                if (Y_hat != Y[i]):
+                    alpha[i] += 1
+                    test = 0
+                
         # Store parameters:
-        self.params['W'] = W
+        self.params['alpha'] = alpha
         self.params['X_train'] = X
         self.params['Y_train'] = Y
-        
+
     def classify(self, X):
         """
         Classify data.
@@ -64,20 +80,21 @@ class knns(classifier):
         m = len(X)
         
         # Get the parameters:
-        W = self.params['W']
+        alpha = self.params['alpha']
         X_train = self.params['X_train']
         Y_train = self.params['Y_train']
-
-        # Define the distance:
-        distance = lambda x,y: np.sqrt(np.sum((x - y) * W * (x - y)))
+                
+        # Get the kernel:
+        K = self.kernel
         
         # Predict:
         Y_hat = np.zeros(m)
         for i in range(m):
-            dist_to_training = np.zeros(n)
             for j in range(n):
-                dist_to_training[j] = distance(X[i,:], X_train[j,:])
-            pos_min = np.argmin(dist_to_training)
-            Y_hat[i] = Y_train[int(pos_min)]
+                Y_hat[i] += alpha[j]*Y_train[j]*K(X_train[j,:], X[i, :])
+            Y_hat[i] = np.sign(Y_hat[i])
+            
+        # Change labels {-1,1} to {0,1}:
+        Y_hat = 1/2*(Y_hat + 1)
         
         return Y_hat

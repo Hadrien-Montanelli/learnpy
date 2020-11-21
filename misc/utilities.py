@@ -5,8 +5,9 @@ Created on Sat Oct 24 16:34:15 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
-import numpy as np
+# Standard library imports:
 import csv
+import numpy as np
 
 def csv_to_array(csv_file):
     """Convert a csv file to a numpy array."""
