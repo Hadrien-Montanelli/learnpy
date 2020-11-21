@@ -27,11 +27,11 @@ Also included:
 The **examples** folder contains examples for each of these functions. 
 
 The **memos** folder contains PDF files about:
-- probability (proba1.pdf &amp; proba2.pdf); 
-- statistics (stats1.pdf, stats2.pdf &amp; stats3.pdf);
-- supervised learning (supervised.pdf).
+- probability (`proba1.pdf` &amp; `proba2.pdf`); 
+- statistics (`stats1.pdf`, `stats2.pdf` &amp; `stats3.pdf`);
+- supervised learning (`supervised.pdf`).
 
 Any comment or question, send an email to: hadrien.montanelli@gmail.com
 
 # License
-See LICENSE.txt for licensing information.
+See `LICENSE.txt` for licensing information.
