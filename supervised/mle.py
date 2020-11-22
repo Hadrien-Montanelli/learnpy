@@ -19,7 +19,7 @@ def mle(X, model):
     
     Inputs
     ------
-    X : numpy array
+    X : numpy.ndarray
         The data as a nxd matrix for n data points in dimension d.
         
     model : str

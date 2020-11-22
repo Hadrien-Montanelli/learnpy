@@ -25,10 +25,10 @@ class shallow(classifier):
         
         Inputs
         ------
-        X : numpy array
+        X : numpy.ndarray
             The training data as a nxd array for n data in dimension d.
         
-        Y : numpy array
+        Y : numpy.ndarray
             The labels as a 1xn array. Labels are {0,1}.
         """
         def sigmoid(x):
@@ -87,12 +87,12 @@ class shallow(classifier):
         
         Inputs
         ------
-        X : numpy array
+        X : numpy.ndarray
             The testing data as a nxd array for n data points in dimension d.
             
         Output
         ------
-        Y_hat : numpy array
+        Y_hat : numpy.ndarray
             Predicted labels as a 1xn array. Labels are {0,1}.
         """
         def sigmoid(x):
