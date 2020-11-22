@@ -17,13 +17,14 @@ import matplotlib.pyplot as plt
 
 # Learnpy imports:
 import misc
-import unsupervised
+import unsupervised as usp
 
 # %% Simple example.
 
 # Find clusters on the following data (in [cm, kg]) with k-means algorithm:
 data = misc.csv_to_array('../../dataset/2d_training.csv')
-clusters = unsupervised.kmeans(data[:,0:2], 2)
+n_clusters = 2
+clusters = usp.kmeans(data[:,0:2], n_clusters)
 print(clusters)
 number_rows = len(data)
 for i in range(number_rows):

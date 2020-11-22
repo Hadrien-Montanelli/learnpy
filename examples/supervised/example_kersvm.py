@@ -18,7 +18,7 @@ import numpy as np
 from sklearn import datasets
 
 # Learnpy imports:
-import supervised
+import supervised as sp
 
 # %% Simple example.
 
@@ -70,7 +70,7 @@ for i in range(number_rows):
 
 # Intialize:
 kernel = lambda x,y: (1 + x @ y)**2
-classifier = supervised.kersvm(n_input, n_train, kernel)
+classifier = sp.kersvm(n_input, n_train, kernel)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -95,7 +95,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 kernel = lambda x,y: (1 + x @ y)**3
-classifier = supervised.kersvm(n_input, n_train, kernel)
+classifier = sp.kersvm(n_input, n_train, kernel)
 
 # Train:
 classifier.train(X_train, Y_train)

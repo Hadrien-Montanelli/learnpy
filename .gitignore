@@ -1,4 +1,5 @@
 .ipynb_checkpoints/
 /misc/__pycache__/
 /supervised/__pycache__/
+/timeseries/__pycache__/
 /unsupervised/__pycache__/

@@ -19,7 +19,7 @@ from sklearn import datasets
 
 # Learnpy imports:
 import misc
-import supervised
+import supervised as sp
 
 # %% Simple example.
     
@@ -52,7 +52,7 @@ for i in range(n_test):
     plt.plot(X_test[i,0], X_test[i,1], color)
     
 # Intialize:
-classifier = supervised.svm(n_input, n_train)
+classifier = sp.svm(n_input, n_train)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -82,7 +82,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
     
 # Intialize:
 n_input = len(X[0])
-classifier = supervised.svm(n_input, n_train)
+classifier = sp.svm(n_input, n_train)
 
 # Train:
 classifier.train(X_train, Y_train)

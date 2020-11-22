@@ -17,7 +17,7 @@ from math import exp, pi, sqrt
 import numpy as np
 
 # Learnpy imports:
-import supervised
+import supervised as sp
 
 # %% Examples.
 
@@ -30,6 +30,6 @@ rho = 0.1
 scaling = 1/(2*pi*sqrt(1-rho**2))
 pdf = lambda x,y: scaling*exp(-(x**2-2*rho*x*y+y**2)/(2*(1-rho**2)))
 domain = np.array([left_x_bound, right_x_bound, left_y_bound, right_y_bound])
-X = supervised.RandVar2(pdf, domain)
+X = sp.RandVar2(pdf, domain)
 X.display()
 X.plot()

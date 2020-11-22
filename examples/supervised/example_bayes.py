@@ -18,7 +18,7 @@ from sklearn import datasets
 
 # Learnpy imports:
 import misc
-import supervised
+import supervised as sp
 
 # %% Simple example.
     
@@ -35,7 +35,7 @@ Y_test = testing_data[:, -1]
 
 # Intialize:
 model = 'normal'
-classifier = supervised.bayes(n_input, n_train, model)
+classifier = sp.bayes(n_input, n_train, model)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -72,7 +72,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 model = 'normal'
-classifier = supervised.bayes(n_input, n_train, model)
+classifier = sp.bayes(n_input, n_train, model)
 
 # Train:
 classifier.train(X_train, Y_train)

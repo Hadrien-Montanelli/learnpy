@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath(
 from sklearn import datasets
 
 # Learnpy imports:
-import supervised
+import supervised as sp
 
 # %% Example from SKLEARN.
 
@@ -31,7 +31,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 n_neurons = 20
-classifier = supervised.shallow(n_input, n_train, n_neurons)
+classifier = sp.shallow(n_input, n_train, n_neurons)
 
 # Train:
 classifier.train(X_train, Y_train)

@@ -9,41 +9,47 @@ Copyright 2020 by Hadrien Montanelli.
 import numpy as np
 from numpy import linalg as LA
 
-def pca(data):
-    """Return the principal components of data.
+def pca(X):
+    """Return the principal components of X.
     
     Input
     -----
-    data : numpy arrray
-        The data stored as a NxD matrix for N observations in dimension D.
+    X : numpy.ndarrray
+        The data as a nxd array for n data points in dimension d.
     
     Outputs
     -------
-    The outputs are the matrices of eigenvalues and eigenvectors of the 
-    sample covariance matrix.
+    output[0] : numpy.ndarrray
+        The eigenvalues of the sample covariance matrix as a dx1 array.  
+    
+    output[1] : numpy.ndarrray
+        THe eigenvectors of the sample covariance matrix as a dxd array. 
     
     Example
     -------
-    This is an example with 2D data.
+    This is an example with 2d data.
     
+        import numpy as np
+        import misc
+        
         data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
-        D, V = pca(data)
+        D, V = misc.pca(data)
     
     See also the 'example_pca' file.
     
     """
-    # Get dimensions:
-    number_rows = len(data)
-    number_cols = len(data[0])
+    # Get the number of data points n and the dimension d:
+    n = len(X)
+    d = len(X[0])
     
-    # Compute the sample mean and centre the data:
-    sample_mean = 1/number_rows*np.sum(data, 0)
-    data = np.array([data[i,:] - sample_mean for i in range(number_rows)])
+    # Compute the sample mean and center the data:
+    sample_mean = 1/n*np.sum(X, 0)
+    X = np.array([X[i,:] - sample_mean for i in range(n)])
     
-    # Eigenvalue decomposition:
-    if number_rows < number_cols:
-        D, V = LA.eig(1/(number_rows-1)*(data @ data.T))
+    # Eigenvalue decomposition of the sample covariance matrix:
+    if (n < d):
+        D, V = LA.eig(1/(n-1)*(X @ X.T))
     else:
-        D, V = LA.eig(1/(number_rows-1)*(data.T @ data))
+        D, V = LA.eig(1/(n-1)*(X.T @ X))
         
     return D, V

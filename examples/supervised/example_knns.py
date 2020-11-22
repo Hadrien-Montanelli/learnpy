@@ -18,7 +18,7 @@ from sklearn import datasets
 
 # Learnpy imports:
 import misc
-import supervised
+import supervised as sp
 
 # %% Simple example.
     
@@ -52,7 +52,7 @@ for i in range(n_test):
     
 # Intialize:
 k = 1
-classifier = supervised.knns(n_input, n_train, k)
+classifier = sp.knns(n_input, n_train, k)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -77,7 +77,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 k = 1
-classifier = supervised.knns(n_input, n_train, k)
+classifier = sp.knns(n_input, n_train, k)
 
 # Train:
 classifier.train(X_train, Y_train)

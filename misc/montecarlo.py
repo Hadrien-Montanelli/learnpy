@@ -8,45 +8,51 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def montecarlo(function, domain, N=1000):
+def montecarlo(f, domain, N=1000):
     """Monte Carlo integrtion of a function on a rectangular domain.
     
     Input
     -----
-    function : lambda
+    f : function
         The function to integrate.
     
     domain : numpy array
-        A rectangluar domain stored as a (2xD)x1 array in dimenion D.
+        A rectangluar domain as a (2*d)x1 array in dimenion d.
     
     N : int
         The number of sample points.
         
     Output
     ------
-    The approximate integral of the function.
+    output ; float
+        The approximate value of the integral.
     
     Example
     -------
-    This is an example in 2D.
+    This is an example in 2d.
     
-        f = lambda x: x[0]**2*cos(x[1])
+        import numpy as np
+        import misc
+        
+        f = lambda x: x[0]**2*np.cos(x[1])
         dom = np.array([0, 2, -1, 1])
-        I = montecarlo(f, dom)
+        I = misc.montecarlo(f, dom)
     
     See also the 'example_montecarlo' file.
     
     """
-    # Get dimension and volume:
-    dimension = int(len(domain)/2)
+    # Get the dimension:
+    d = int(len(domain)/2)
+    
+    # Compute the volume of the domain:
     V = 1
-    for j in range(dimension):
+    for j in range(d):
         V *= domain[2*j+1] - domain[2*j]
     
     # Sample the domain uniformly:
-    points = np.zeros([N, dimension])
+    points = np.zeros([N, d])
     for i in range(N):
-        for j in range(dimension):
+        for j in range(d):
             a = domain[2*j]
             b = domain[2*j+1]
             points[i, j] = a + (b - a)*np.random.uniform()
@@ -54,7 +60,7 @@ def montecarlo(function, domain, N=1000):
     # Compute the integral:
     S = 0
     for point in points:
-        S += function(point)
+        S += f(point)
     I = V/N*S
         
     return I

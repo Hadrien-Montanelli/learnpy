@@ -9,41 +9,51 @@ Copyright 2020 by Hadrien Montanelli.
 import numpy as np
 
 def ar(series, p):
-    '''Autoregression AR(p) of data.
+    '''Autoregression AR(p) of a series.
     
     Inputs
     ------
-    series : numpy array
-        A time series stored as a Tx1 vector for T observations.
+    series : numpy.ndarray
+        A time series as a Tx1 array for T data points.
         
     p : int
         Parameter in the AR(p) model.
     
     Outputs
     -------
-    The first output is the bias while the second output is the rest of the 
-    model parameters.
+    output[0] : float
+        The bias.    
     
+    output[1] : numpy.ndarray
+        The rest of the model parameters as a px1 array.
+        
     Example
     -------
+        import numpy as np
+        import timeseries as ts
+        
         x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
-        output = ar(x_t, 2)
+        output = ts.ar(x_t, 2)
         print(output)
-
+        
     See also the 'example_ar' file.
     '''
-    # Assemble the autoregression matrix:
+    # Get the number of data points:
     T = len(series)
-    y = series[p:]
-    x = np.zeros([T-1, p+1])
+    
+    # Assemble the RHS for least squares:
+    Y = series[p:]
+    
+    # Assemble the autoregression matrix for least squares:
+    X = np.zeros([T-1, p+1])
     for t in range(T-1):
-        x[t, 0] = 1
+        X[t, 0] = 1
         for i in range(1, p+1):
             if i - 1 <= t:
-                x[t, i] = series[t-i+1]
-    x = x[p-1:, :]
+                X[t, i] = series[t-i+1]
+    X = X[p-1:, :]
 
     # Least squares:
-    phi = np.linalg.inv(x.T @ x) @ x.T @ y
+    phi = np.linalg.inv(X.T @ X) @ X.T @ Y
  
     return phi[0], phi[1:]

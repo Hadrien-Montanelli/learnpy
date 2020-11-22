@@ -19,13 +19,13 @@ from statsmodels.tsa.stattools import acf
 
 # Learnpy imports:
 import misc
-import timeseries
+import timeseries as ts
 
 # %% Examples.
 
 # AR(1)-type time series:
 series = misc.csv_to_array('../../dataset/time_series_ar1.csv')
-sample_acf = timeseries.autocorr(series)
+sample_acf = ts.autocorr(series)
 plt.plot(sample_acf[1:], '-')
 sample_acf_statsmodels = acf(series, nlags=len(series), fft=False)
 plt.plot(sample_acf_statsmodels[1:], '--')
@@ -34,7 +34,7 @@ print('Error: ', error) # compare with statsmodels' acf
 
 # MA(1)-type time series:
 series = misc.csv_to_array('../../dataset/time_series_ma1.csv')
-sample_acf = timeseries.autocorr(series)
+sample_acf = ts.autocorr(series)
 plt.figure()
 plt.plot(sample_acf[1:], '-')
 sample_acf_statsmodels = acf(series, nlags=len(series), fft=False)

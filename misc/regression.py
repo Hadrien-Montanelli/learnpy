@@ -8,61 +8,71 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def regression(x, y, model):
-    '''Regression of y on x.
+def regression(X, Y, model):
+    '''Regression of Y on X.
     
     Inputs
     ------
-    x : numpy array
-        The dependent variables stored as a NxD matrix for N observations in
-        dimension D.
+    X : numpy.ndarray
+        The independent variables as a nxd array for n data points in 
+        dimension d.
         
-    y : numpy array
-        The independent variable stored as Nx1 vector.
+    Y : numpy.ndarray
+        The dependent variable as a nx1 array.
         
     model : str
         The model for regression. Only 'linear' is supported.
     
     Outputs
     -------
-    The first output is the bias while the second output is the rest of the 
-    model parameters.
+    output[0] : float
+        The bias.
+        
+    outpt[1] : numpy.ndarray
+        The rest of the model parameters as a dx1 array.
     
     Example
     -------
-    This is an example in 1D.
+    This is an example in 1d.
+    
+        import numpy as np
+        import misc
     
         x = np.linspace(-1, 1, 100)
         y = 2*x + 6 + 5e-1*np.random.randn(100)
-        output = regression(x, y, 'linear')
+        output = misc.regression(x, y, 'linear')
         print(output)
     
     See also the 'example_regression' file.
     '''
-    # Get the number of data and the dimension:
-    n = len(x)
-    if len(x.shape) == 1:
-        dimension = 1
+    # Get the number of data points n and the dimension d:
+    n = len(X)
+    if (len(X.shape) == 1):
+        d = 1
     else:
-        dimension = len(x[0])
+        d = len(X[0])
         
     # TO IMPROVE: add logistic regression.
-    if model == 'linear':
+    if (model == 'linear'):
         
         # One-dimensional case:
-        if dimension == 1:
-            x_bar = 1/n*sum(x)
-            y_bar = 1/n*sum(y)
-            beta = sum((x - x_bar)*y)/sum((x - x_bar)**2)
-            alpha = y_bar - beta*x_bar
+        if (d == 1):
+            X_bar = 1/n*sum(X)
+            Y_bar = 1/n*sum(Y)
+            beta = sum((X - X_bar) * Y)/sum((X - X_bar)**2)
+            alpha = Y_bar - beta*X_bar
             return alpha, beta
             
         # Higher dimensions:
         else:
-            z = np.zeros([n, dimension + 1])
-            for i in range(n):
-                z[i, 0] = 1 # bias
-                z[i, 1:] = x[i, :]
             
-            beta = np.linalg.inv(z.T @ z) @ z.T @ y
+            # Add a column of 1's for the bias:
+            Z = np.zeros([n, d+1])
+            for i in range(n):
+                Z[i, 0] = 1 # bias
+                Z[i, 1:] = X[i, :]
+            
+            # Least squares:
+            beta = np.linalg.inv(Z.T @ Z) @ Z.T @ Y
+            
             return beta[0], beta[1:]
