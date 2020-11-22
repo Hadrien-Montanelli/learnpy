@@ -28,7 +28,7 @@ def regression(X, Y, model):
     output[0] : float
         The bias.
         
-    outpt[1] : numpy.ndarray
+    output[1] : numpy.ndarray
         The rest of the model parameters as a dx1 array.
     
     Example
