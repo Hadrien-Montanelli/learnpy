@@ -30,10 +30,10 @@ def ar(series, p):
     Example
     -------
         import numpy as np
-        import timeseries as ts
+        from learnpy.timeseries import ar
         
         x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
-        output = ts.ar(x_t, 2)
+        output = ar(x_t, 2)
         print(output)
         
     See also the 'example_ar' file.

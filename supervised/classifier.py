@@ -28,6 +28,21 @@ class classifier(ABC):
         pass
 
     def accuracy(self, Y, Y_hat):
+        """Compute the accuracy of a classifier.
+        
+        Inputs
+        ------
+        Y : numpy.ndarray
+            Exact values as a 1xn array.
+        
+        Y_hat : numpy.ndarray
+            Predicted values as a 1xn array.
+            
+        Output
+        ------
+        output : float
+            The accuracy of the classifier in %.
+        """
         def _to_binary(x):
             return 1 if x > .5 else 0
         

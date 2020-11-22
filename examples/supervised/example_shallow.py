@@ -7,16 +7,11 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 from sklearn import datasets
 
 # Learnpy imports:
-import supervised as sp
+from learnpy.supervised import shallow
 
 # %% Example from SKLEARN.
 
@@ -31,7 +26,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 n_neurons = 20
-classifier = sp.shallow(n_input, n_train, n_neurons)
+classifier = shallow(n_input, n_train, n_neurons)
 
 # Train:
 classifier.train(X_train, Y_train)

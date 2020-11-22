@@ -7,17 +7,13 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 import csv
 
 # Learnpy imports:
-import misc
+from learnpy.misc import list_to_array
+from learnpy.misc import pca
 
 # %% Example.
 
@@ -28,10 +24,10 @@ for row in data:
     del row[0]
     del row[0]
     del row[0]
-X = misc.list_to_array(data)
+X = list_to_array(data)
 
 # PCA:
-D, V = misc.pca(X)
+D, V = pca(X)
 
 # Plot two principal components:
 Z = X @ V

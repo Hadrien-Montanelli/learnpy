@@ -30,10 +30,10 @@ def kmeans(X, k):
     This is an example with 2d data.
     
         import numpy as np
-        import unsupervised as usp
+        from learnpy.unsupervised import kmeans
         
         data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
-        output = usp.kmeans(data, 2)
+        output = kmeans(data, 2)
         print(output)
       
     See also the 'example_kmeans' file.

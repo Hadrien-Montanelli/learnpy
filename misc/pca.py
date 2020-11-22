@@ -30,10 +30,10 @@ def pca(X):
     This is an example with 2d data.
     
         import numpy as np
-        import misc
+        from learnpy.misc import pca
         
         data = np.array([[170, 80], [172, 90], [180, 68], [169, 77]])
-        D, V = misc.pca(data)
+        D, V = pca(data)
     
     See also the 'example_pca' file.
     

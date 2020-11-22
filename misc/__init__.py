@@ -5,8 +5,8 @@ Created on Sat Nov 21 18:24:48 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
+from .csv_to_array import csv_to_array
+from .list_to_array import list_to_array
 from .montecarlo import montecarlo
 from .pca import pca
 from .regression import regression
-from .utilities import csv_to_array
-from .utilities import list_to_array

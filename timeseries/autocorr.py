@@ -24,10 +24,10 @@ def autocorr(series):
     Example
     -------
         import numpy as np
-        import timeseries as ts
+        from learnpy.timeseries import autocorr
         
         x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
-        output = ts.autocorr(x_t)
+        output = autocorr(x_t)
         print(output)
         
     See also the 'example_autocorr' file.

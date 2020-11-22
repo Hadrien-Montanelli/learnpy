@@ -7,24 +7,19 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 from sklearn import datasets
 
 # Learnpy imports:
-import misc
-import supervised as sp
+from learnpy.misc import csv_to_array
+from learnpy.supervised import bayes
 
 # %% Simple example.
     
 # Get the data (in [cm, kg]):
-training_data = misc.csv_to_array('../../dataset/2d_training.csv')
-testing_data = misc.csv_to_array('../../dataset/2d_testing.csv')
+training_data = csv_to_array('../../dataset/2d_training.csv')
+testing_data = csv_to_array('../../dataset/2d_testing.csv')
 n_input = 2
 n_train = len(training_data)
 n_test = len(testing_data)
@@ -35,7 +30,7 @@ Y_test = testing_data[:, -1]
 
 # Intialize:
 model = 'normal'
-classifier = sp.bayes(n_input, n_train, model)
+classifier = bayes(n_input, n_train, model)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -72,7 +67,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 model = 'normal'
-classifier = sp.bayes(n_input, n_train, model)
+classifier = bayes(n_input, n_train, model)
 
 # Train:
 classifier.train(X_train, Y_train)

@@ -7,24 +7,19 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 
 # Learnpy imports:
-import misc
-import unsupervised as usp
+from learnpy.misc import csv_to_array
+from learnpy.unsupervised import kmeans
 
 # %% Simple example.
 
 # Find clusters on the following data (in [cm, kg]) with k-means algorithm:
-data = misc.csv_to_array('../../dataset/2d_training.csv')
+data = csv_to_array('../../dataset/2d_training.csv')
 n_clusters = 2
-clusters = usp.kmeans(data[:,0:2], n_clusters)
+clusters = kmeans(data[:,0:2], n_clusters)
 print(clusters)
 number_rows = len(data)
 for i in range(number_rows):

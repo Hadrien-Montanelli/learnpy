@@ -7,25 +7,20 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets
 
 # Learnpy imports:
-import misc
-import supervised as sp
+from learnpy.misc import csv_to_array
+from learnpy.supervised import svm
 
 # %% Simple example.
     
 # Get the data (in [cm, kg]):
-training_data = misc.csv_to_array('../../dataset/2d_training.csv')
-testing_data = misc.csv_to_array('../../dataset/2d_testing.csv')
+training_data = csv_to_array('../../dataset/2d_training.csv')
+testing_data = csv_to_array('../../dataset/2d_testing.csv')
 n_input = 2
 n_train = len(training_data)
 n_test = len(testing_data)
@@ -52,7 +47,7 @@ for i in range(n_test):
     plt.plot(X_test[i,0], X_test[i,1], color)
     
 # Intialize:
-classifier = sp.svm(n_input, n_train)
+classifier = svm(n_input, n_train)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -82,7 +77,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
     
 # Intialize:
 n_input = len(X[0])
-classifier = sp.svm(n_input, n_train)
+classifier = svm(n_input, n_train)
 
 # Train:
 classifier.train(X_train, Y_train)

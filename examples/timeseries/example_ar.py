@@ -7,26 +7,21 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 import numpy as np
 
 # Learnpy imports:
-import misc
-import timeseries as ts
+from learnpy.misc import csv_to_array
+from learnpy.timeseries import ar
 
 # %% Examples.
 
 # Test AR(1):
-series = misc.csv_to_array('../../dataset/time_series_ar1.csv')
+series = csv_to_array('../../dataset/time_series_ar1.csv')
 plt.plot(series, '.-')
 p = 1
-alpha, beta = ts.ar(series, p)
+alpha, beta = ar(series, p)
 print([alpha, beta])
 prediction = np.zeros(len(series))
 prediction[0] = series[0]
@@ -35,11 +30,11 @@ for k in range(len(series)-1):
 plt.plot(prediction, '.-')
 
 # Test AR(2):
-series = misc.csv_to_array('../../dataset/time_series_ar2.csv')
+series = csv_to_array('../../dataset/time_series_ar2.csv')
 plt.figure()
 plt.plot(series, '.-')
 p = 2
-alpha, beta = ts.ar(series, p)
+alpha, beta = ar(series, p)
 print([alpha, beta])
 prediction = np.zeros(len(series))
 prediction[0] = series[0]

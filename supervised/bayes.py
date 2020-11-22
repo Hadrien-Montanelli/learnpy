@@ -30,7 +30,7 @@ class bayes(classifier):
             The training data as a nxd array for n data in dimension d.
         
         Y : numpy array
-            The labels as an 1xn array. Labels are {0,1}.
+            The labels as a 1xn array. Labels are {0,1}.
         """
         # Get dimensions:
         d = self.n_input
@@ -64,7 +64,7 @@ class bayes(classifier):
         Inputs
         ------
         X : numpy array
-            The data to classify as a nxd array for n data in dimension d.
+            The testing data as a nxd array for n data points in dimension d.
             
         Output
         ------

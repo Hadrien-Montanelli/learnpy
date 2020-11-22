@@ -36,11 +36,11 @@ def regression(X, Y, model):
     This is an example in 1d.
     
         import numpy as np
-        import misc
+        from learnpy.misc import regression
     
         x = np.linspace(-1, 1, 100)
         y = 2*x + 6 + 5e-1*np.random.randn(100)
-        output = misc.regression(x, y, 'linear')
+        output = regression(x, y, 'linear')
         print(output)
     
     See also the 'example_regression' file.

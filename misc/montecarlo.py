@@ -32,11 +32,11 @@ def montecarlo(f, domain, N=1000):
     This is an example in 2d.
     
         import numpy as np
-        import misc
+        from learnpy.misc import montecarlo
         
         f = lambda x: x[0]**2*np.cos(x[1])
         dom = np.array([0, 2, -1, 1])
-        I = misc.montecarlo(f, dom)
+        I = montecarlo(f, dom)
     
     See also the 'example_montecarlo' file.
     

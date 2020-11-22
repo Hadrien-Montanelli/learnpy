@@ -24,13 +24,3 @@ def csv_to_array(csv_file):
             for l in range(number_cols):
                 data_array[k, l] = data_list[k][l]
     return data_array
-
-def list_to_array(data_list):
-    """Convert a list to a numpy.ndarray."""
-    number_rows = len(data_list)
-    number_cols = len(data_list[0])
-    data_array = np.zeros([number_rows, number_cols])
-    for k in range(number_rows):
-        for l in range(number_cols):
-            data_array[k, l] = data_list[k][l]
-    return data_array

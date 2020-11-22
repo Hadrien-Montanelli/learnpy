@@ -7,18 +7,13 @@ Copyright 2020 by Hadrien Montanelli.
 """
 # %% Imports.
 
-# System imports:
-import os, sys
-sys.path.insert(0, os.path.abspath(
-    os.path.join(os.path.dirname(__file__), '../..')))
-
 # Standard library imports:
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets
 
 # Learnpy imports:
-import supervised as sp
+from learnpy.supervised import kerpercep
 
 # %% Simple example.
 
@@ -70,7 +65,7 @@ for i in range(number_rows):
 
 # Intialize:
 kernel = lambda x,y: (1 + x @ y)**2
-classifier = sp.kerpercep(n_input, n_train, kernel)
+classifier = kerpercep(n_input, n_train, kernel)
 
 # Train:
 classifier.train(X_train, Y_train)
@@ -95,7 +90,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 kernel = lambda x,y: (1 + x @ y)**3
-classifier = sp.kerpercep(n_input, n_train, kernel)
+classifier = kerpercep(n_input, n_train, kernel)
 
 # Train:
 classifier.train(X_train, Y_train)
