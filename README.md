@@ -60,7 +60,7 @@ Don't forget to `souce ~/.bash_profile` when you're done.
 I recommend taking a look at the **examples** folder. To get a taste of what computing with learnpy is like, type:
 ```python
 import numpy as np
-from learnpy.timeseries import ar
+from learnpy.timeseries import ar, autocorr, pautocorr
         
 x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
 
