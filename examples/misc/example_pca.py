@@ -18,7 +18,7 @@ from learnpy.misc import pca
 # %% Example.
 
 # Load data:
-data = list(csv.reader(open('../../dataset/crabs.csv')))
+data = list(csv.reader(open('../../datasets/crabs.csv')))
 data.pop(0)
 for row in data:
     del row[0]

@@ -19,7 +19,7 @@ from learnpy.timeseries import pautocorr
 # %% Examples.
 
 # AR(1)-type time series:
-series = csv_to_array('../../dataset/time_series_ar1.csv')
+series = csv_to_array('../../datasets/time_series_ar1.csv')
 sample_pacf = pautocorr(series)
 plt.plot(sample_pacf[1:], '-')
 sample_pacf_statsmodels = pacf(series, nlags=len(series)-1, method='ywm')
@@ -28,7 +28,7 @@ error = np.linalg.norm(sample_pacf - sample_pacf_statsmodels)
 print('Error: ', error) # compare with statsmodels' pacf
 
 # MA(1)-type time series:
-series = csv_to_array('../../dataset/time_series_ma1.csv')
+series = csv_to_array('../../datasets/time_series_ma1.csv')
 sample_pacf = pautocorr(series)
 plt.figure()
 plt.plot(sample_pacf[1:], '-')

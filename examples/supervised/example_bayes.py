@@ -18,8 +18,8 @@ from learnpy.supervised import bayes
 # %% Simple example.
     
 # Get the data (in [cm, kg]):
-training_data = csv_to_array('../../dataset/2d_training.csv')
-testing_data = csv_to_array('../../dataset/2d_testing.csv')
+training_data = csv_to_array('../../datasets/2d_training.csv')
+testing_data = csv_to_array('../../datasets/2d_testing.csv')
 n_input = 2
 n_train = len(training_data)
 n_test = len(testing_data)

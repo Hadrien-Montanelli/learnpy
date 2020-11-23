@@ -19,7 +19,7 @@ from learnpy.timeseries import autocorr
 # %% Examples.
 
 # AR(1)-type time series:
-series = csv_to_array('../../dataset/time_series_ar1.csv')
+series = csv_to_array('../../datasets/time_series_ar1.csv')
 sample_acf = autocorr(series)
 plt.plot(sample_acf[1:], '-')
 sample_acf_statsmodels = acf(series, nlags=len(series), fft=False)
@@ -28,7 +28,7 @@ error = np.linalg.norm(sample_acf - sample_acf_statsmodels)
 print('Error: ', error) # compare with statsmodels' acf
 
 # MA(1)-type time series:
-series = csv_to_array('../../dataset/time_series_ma1.csv')
+series = csv_to_array('../../datasets/time_series_ma1.csv')
 sample_acf = autocorr(series)
 plt.figure()
 plt.plot(sample_acf[1:], '-')

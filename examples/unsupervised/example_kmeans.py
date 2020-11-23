@@ -17,7 +17,7 @@ from learnpy.unsupervised import kmeans
 # %% Simple example.
 
 # Find clusters on the following data (in [cm, kg]) with k-means algorithm:
-data = csv_to_array('../../dataset/2d_training.csv')
+data = csv_to_array('../../datasets/2d_training.csv')
 n_clusters = 2
 clusters = kmeans(data[:,0:2], n_clusters)
 print(clusters)

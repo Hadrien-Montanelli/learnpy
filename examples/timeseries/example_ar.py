@@ -18,7 +18,7 @@ from learnpy.timeseries import ar
 # %% Examples.
 
 # Test AR(1):
-series = csv_to_array('../../dataset/time_series_ar1.csv')
+series = csv_to_array('../../datasets/time_series_ar1.csv')
 plt.plot(series, '.-')
 p = 1
 alpha, beta = ar(series, p)
@@ -30,7 +30,7 @@ for k in range(len(series)-1):
 plt.plot(prediction, '.-')
 
 # Test AR(2):
-series = csv_to_array('../../dataset/time_series_ar2.csv')
+series = csv_to_array('../../datasets/time_series_ar2.csv')
 plt.figure()
 plt.plot(series, '.-')
 p = 2
