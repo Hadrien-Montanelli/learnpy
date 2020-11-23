@@ -49,7 +49,7 @@ git clone https://github.com/Hadrien-Montanelli/learnpy.git
 ### PYTHONPATH
 Once you have a copy of learnpy, you have to add it to your PYTHONPATH. If you're using an editor like Spyder, you can do this with the integrated PYTHONPATH manager. 
 
-Otherwise, you can directly change your PYTHONPATH. For example, on a MAC, edit your `~/.bash_profile` and add:
+Otherwise, you can directly change your PYTHONPATH. For example, on a Mac, edit your `~/.bash_profile` and add:
 ```
 export PYTHONPATH="${PYTHONPATH}:/path_to_learnpy/"
 ```
