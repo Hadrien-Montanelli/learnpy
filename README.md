@@ -69,7 +69,7 @@ autocorr(x_t)              # compute the autocorrelation function
 pautocorr(x_t)             # compute the partial autocorrelation function
 ```
 
-The following example trains a shallow network with 10 neurons; the dataset has 20 features, the training set contains 4,000 data points and the testing set contains 1,000 data points:
+The following example trains a shallow network with 10 neurons; the dataset has 20 features, the training set contains 4,000 data points while the testing set contains 1,000 data points:
 ```python
 from sklearn import datasets
 from learnpy.supervised import shallow
@@ -84,6 +84,7 @@ Y_hat = classifier.classify(X_test)               # classify
 acc = classifier.accuracy(Y_test, Y_hat)          # compute the accuracy
 print(f'Accuracy: {acc}%')
 ```
+We've just trained and tested a shallow network that has a single hidden layer (10 neurons with ReLU activation functions) and an output layer (sigmoid).
 
 Any comment or question, send an email to: hadrien.montanelli@gmail.com
 
