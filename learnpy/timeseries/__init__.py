@@ -5,6 +5,6 @@ Created on Sat Nov 21 18:24:48 2020
 
 Copyright 2020 by Hadrien Montanelli.
 """
-from .ar import ar
-from .autocorr import autocorr
-from .pautocorr import pautocorr
+from .arp import arp
+from .acf import acf
+from .pacf import pacf

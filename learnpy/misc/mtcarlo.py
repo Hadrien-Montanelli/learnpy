@@ -8,7 +8,7 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def montecarlo(f, domain, N=1000):
+def mtcarlo(f, domain, N=1000):
     """Monte Carlo integrtion of a function on a rectangular domain.
     
     Input

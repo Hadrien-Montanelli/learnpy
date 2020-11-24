@@ -14,7 +14,7 @@ import numpy as np
 from pylab import meshgrid 
 
 # Learnpy imports:
-from learnpy.misc import regression
+from learnpy.misc import reg
 
 # %% Examples.
 
@@ -24,7 +24,7 @@ n = 100
 x = np.linspace(-1, 1, 100)
 y = 2*x + 6 + 5e-1*np.random.randn(n)
 plt.plot(x, y, '.r')
-alpha, beta = regression(x, y, 'linear')
+alpha, beta = reg(x, y, 'linear')
 print([alpha, beta])
 plt.plot(x, alpha + beta*x, 'k')
 
@@ -43,7 +43,7 @@ fig = plt.figure()
 ax = plt.gca(projection='3d')
 for k in range(x.shape[0]):
     ax.scatter(x[k,0], x[k,1], y[k], c='r')   
-alpha, beta = regression(x, y, 'linear')
+alpha, beta = reg(x, y, 'linear')
 print([alpha, beta])
 X_1, X_2 = meshgrid(x[:,0], x[:,1])
 Y = alpha + beta[0]*X_1 + beta[1]*X_2

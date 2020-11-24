@@ -13,7 +13,7 @@ import numpy as np
 
 # Learnpy imports:
 from learnpy.misc import csv_to_array
-from learnpy.timeseries import ar
+from learnpy.timeseries import arp
 
 # %% Examples.
 
@@ -21,7 +21,7 @@ from learnpy.timeseries import ar
 series = csv_to_array('../../datasets/time_series_ar1.csv')
 plt.plot(series, '.-')
 p = 1
-alpha, beta = ar(series, p)
+alpha, beta = arp(series, p)
 print([alpha, beta])
 prediction = np.zeros(len(series))
 prediction[0] = series[0]
@@ -34,7 +34,7 @@ series = csv_to_array('../../datasets/time_series_ar2.csv')
 plt.figure()
 plt.plot(series, '.-')
 p = 2
-alpha, beta = ar(series, p)
+alpha, beta = arp(series, p)
 print([alpha, beta])
 prediction = np.zeros(len(series))
 prediction[0] = series[0]

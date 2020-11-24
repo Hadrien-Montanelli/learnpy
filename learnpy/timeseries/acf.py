@@ -8,7 +8,7 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def autocorr(series):
+def acf(series):
     '''Compute the sample autocorrelation function of a series.
     
     Input

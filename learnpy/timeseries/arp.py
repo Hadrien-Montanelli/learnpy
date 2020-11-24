@@ -8,7 +8,7 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def ar(series, p):
+def arp(series, p):
     '''Autoregression AR(p) of a series.
     
     Inputs

@@ -34,7 +34,7 @@ class knns(classifier):
         Y : numpy.ndarray
             The labels as a 1xn array. Labels are {0,1}.
         """
-        # Get dimensions:
+        # Get the dimensions:
         d = self.n_input
         
         # TO IMPROVE: find the distance that best separates the training data.

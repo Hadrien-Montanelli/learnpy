@@ -8,7 +8,7 @@ Copyright 2020 by Hadrien Montanelli.
 # Standard library imports:
 import numpy as np
 
-def regression(X, Y, model):
+def reg(X, Y, model):
     '''Regression of Y on X.
     
     Inputs

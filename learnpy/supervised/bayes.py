@@ -32,7 +32,7 @@ class bayes(classifier):
         Y : numpy.ndarray
             The labels as a 1xn array. Labels are {0,1}.
         """
-        # Get dimensions:
+        # Get the dimensions:
         d = self.n_input
         n = self.n_train
         
@@ -71,7 +71,7 @@ class bayes(classifier):
         Y_hat : numpy.ndarray
             Predicted labels as a 1xn array. Labels are {0,1}.
         """
-        # Get dimensions:
+        # Get the dimensions:
         d = self.n_input
         m = len(X)
         

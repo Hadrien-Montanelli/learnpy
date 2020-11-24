@@ -33,12 +33,24 @@ class shallow(classifier):
         """
         def sigmoid(x):
             return 1/(1 + np.exp(-x))
+        
+        def dsigmoid(x):
+            grad = sigmoid(x) * (1 - sigmoid(x))
+            return grad
     
+        def relu(x):
+            return np.maximum(x, 0)
+        
+        def drelu(x):
+            grad = np.zeros(x.shape)
+            grad[x>0] = 1
+            return grad
+            
         # Parameters:
         max_iteration = 100 # number of gradient descent iterations
         lr = 1 # gradient learning rate
         
-        # Get dimensions:
+        # Get the dimensions:
         d = self.n_input
         n = self.n_train
         N = self.n_neurons
@@ -54,16 +66,18 @@ class shallow(classifier):
         while (iteration < max_iteration):
                     
             # Forward:
-            Z1 = W1.T @ X.T + W10
-            A1 = sigmoid(Z1)   
+            Z1 = W1.T @ X.T + W10  
+            A1 = relu(Z1)
             Z2 = W2.T @ A1 + W20
             A2 = sigmoid(Z2)
     
             # Backward:
-            dZ2 = A2 - Y
+            dA2 = (A2 - Y) / (A2 * (1 - A2))
+            dZ2 = dA2 * dsigmoid(Z2)
             dW2 = 1/n * (A1 @ dZ2.T)
             dW20 = 1/n * np.sum(dZ2, axis = 1, keepdims = True)
-            dZ1 = W2 @ dZ2 * A1 * (1 - A1)
+            dA1 = W2 @ dZ2
+            dZ1 = dA1 * drelu(Z1)
             dW1 = 1/n * (X.T @ dZ1.T)
             dW10 = 1/n * np.sum(dZ1, axis = 1, keepdims = True)
             
@@ -98,6 +112,9 @@ class shallow(classifier):
         def sigmoid(x):
             return 1/(1 + np.exp(-x))
         
+        def relu(x):
+            return np.maximum(x, 0)
+        
         # Get the parameters:
         W10 = self.params['W10']
         W1 = self.params['W1']
@@ -105,8 +122,8 @@ class shallow(classifier):
         W2 = self.params['W2']
         
         # Predict:
-        Z1 = W1.T @ X.T + W10
-        A1 = sigmoid(Z1)   
+        Z1 = W1.T @ X.T + W10 
+        A1 = relu(Z1) 
         Z2 = W2.T @ A1 + W20
         Y_hat = sigmoid(Z2)
         

@@ -7,6 +7,7 @@ Copyright 2020 by Hadrien Montanelli.
 """
 from .bayes import bayes
 from .classifier import classifier
+from .deep import deep
 from .kerpercep import kerpercep
 from .kersvm import kersvm
 from .knns import knns

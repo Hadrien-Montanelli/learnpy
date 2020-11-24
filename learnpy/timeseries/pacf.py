@@ -9,9 +9,9 @@ Copyright 2020 by Hadrien Montanelli.
 import numpy as np
 
 # Learnpy imports:
-from .autocorr import autocorr
+from .acf import acf
 
-def pautocorr(series):
+def pacf(series):
     '''Compute the sample partial autocorrelation function of a series.
     
     Input
@@ -39,7 +39,7 @@ def pautocorr(series):
     T = len(series)
 
     # Compute the sample autocorrelation function:
-    sample_acf = autocorr(series)
+    sample_acf = acf(series)
     
     # Compute the partial sample autocorrelation function:
     sample_pacf = np.zeros(T)

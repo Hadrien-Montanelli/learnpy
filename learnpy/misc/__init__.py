@@ -7,6 +7,6 @@ Copyright 2020 by Hadrien Montanelli.
 """
 from .csv_to_array import csv_to_array
 from .list_to_array import list_to_array
-from .montecarlo import montecarlo
+from .mtcarlo import mtcarlo
 from .pca import pca
-from .regression import regression
+from .reg import reg
