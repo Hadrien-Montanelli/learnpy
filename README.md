@@ -69,16 +69,16 @@ autocorr(x_t)              # compute the autocorrelation function
 pautocorr(x_t)             # compute the partial autocorrelation function
 ```
 
-The following example trains a shallow network with 10 neurons:
+The following example trains a shallow network with 10 neurons; the dataset has 20 features, the training set contains 4,000 data points and the testing set contains 1,000 data points:
 ```python
 from sklearn import datasets
 from learnpy.supervised import shallow
 
 X, Y = datasets.make_classification(5000, random_state = 123)
 
-X_train, X_test = X[:4000], X[4000:]              # data points (20 features)
-Y_train, Y_test = Y[:4000], Y[4000:]              # labels
-classifier = shallow(20, 4000, 10)                # create a shallow network with 10 neurons
+X_train, X_test = X[:4000], X[4000:]              # data points (training set & testing set)
+Y_train, Y_test = Y[:4000], Y[4000:]              # labels (training set & testing set)
+classifier = shallow(20, 4000, 10)                # shallow network (20 features, 4,000 points, 10 neurons)
 classifier.train(X_train, Y_train)                # train
 Y_hat = classifier.classify(X_test)               # classify
 acc = classifier.accuracy(Y_test, Y_hat)          # compute the accuracy
