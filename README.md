@@ -3,25 +3,26 @@ Python package for supervised &amp; unsupervised learning, and times series.
 
 Algorithms for **supervised learning** include:
 - naive Bayes classifier (`bayes`);
+- deep neural networks (`deep`);
+- kernel perceptron algorithm (`kerpercep`);
+- kernel support vector machines (`kersvm`);
 - *k*-nearest neighbors (`knns`);
 - perceptron algorithm (`percep`);
-- kernel perceptron algorithm (`kerpercep`);
-- support vector machines (`svm`);
-- kernel support vector machines (`kersvm`);
-- shallow neural networks (`shallow`).
+- shallow neural networks (`shallow`);
+- support vector machines (`svm`).
 
 Algorithms for **unsupervised learning** include:
 - *k*-means (`kmeans`).
 
 Algorithms for **time series** include:
-- autoregression (`ar`);
-- autocorrelation computation (`autocorr`);
-- partial autocorrelation computation (`pautocorr`).
+- autoregression of order *p* (`arp`);
+- autocorrelation function (`acf`);
+- partial autocorrelation computation (`pacf`).
 
 Also included:
-- Monte Carlo integration (`montecarlo`);
+- Monte Carlo integration (`mtcarlo`);
 - princpal componenent analysis (`pca`);
-- regression (`regression`).
+- regression (`reg`).
 
 The **examples** folder contains examples for each of these functions. 
 
@@ -64,9 +65,9 @@ from learnpy.timeseries import ar, autocorr, pautocorr
         
 x_t = np.linspace(-1, 1, 100) + 5e-1*np.random.randn(100)
 
-ar(x_t, 2)                 # auto-regression with parameter p=2
-autocorr(x_t)              # compute the autocorrelation function
-pautocorr(x_t)             # compute the partial autocorrelation function
+arp(x_t, 2)           # auto-regression with parameter p=2
+acf(x_t)              # compute the autocorrelation function
+pacf(x_t)             # compute the partial autocorrelation function
 ```
 
 The following example trains a shallow network with 10 neurons; the dataset has 20 features, the training set contains 4,000 data points while the testing set contains 1,000 data points:
@@ -85,6 +86,22 @@ acc = classifier.accuracy(Y_test, Y_hat)          # compute the accuracy
 print(f'Accuracy: {acc}%')
 ```
 We've just trained and tested a shallow network that has a single hidden layer (10 neurons with ReLU activation functions) and an output layer (sigmoid).
+
+Deep neural networks are also supported:
+```python
+from sklearn import datasets
+from learnpy.supervised import deep
+
+X, Y = datasets.make_classification(5000, random_state = 123)
+
+X_train, X_test = X[:4000], X[4000:]              # data points (training set & testing set)
+Y_train, Y_test = Y[:4000], Y[4000:]              # labels (training set & testing set)
+classifier = deep(20, 4000, 2, np.array([5, 4]))  # deep network (2 hidden layers with 5 & 4 neurons)
+classifier.train(X_train, Y_train)                # train
+Y_hat = classifier.classify(X_test)               # classify
+acc = classifier.accuracy(Y_test, Y_hat)          # compute the accuracy
+print(f'Accuracy: {acc}%')
+```
 
 Any comment or question, send an email to: hadrien.montanelli@gmail.com
 
