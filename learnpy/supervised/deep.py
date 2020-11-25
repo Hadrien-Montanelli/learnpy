@@ -110,8 +110,7 @@ class deep(classifier):
                 self.params['W' + str(l)] -= lr * dW
                 self.params['W' + str(l) + str(0)] -= lr * dW0
             
-            
-            # Compute cost function:     
+            # Compute the cost function:     
             A = values['A' + str(L+1)]
             J = self.cost(Y, A)
             if (iteration == 0):

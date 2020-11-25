@@ -93,7 +93,7 @@ class shallow(classifier):
             W20 -= lr * dW20
             W2 -= lr * dW2
 
-            # Compute cost function:            
+            # Compute the cost function:            
             J = self.cost(Y, A2)
             if (iteration == 0):
                 J0 = self.cost(Y, A2)
