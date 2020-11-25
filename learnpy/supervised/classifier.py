@@ -51,3 +51,23 @@ class classifier(ABC):
         acc = round(100*acc, 2)
         
         return acc
+    
+    def cost(self, Y, Y_hat):
+        """Compute the value of the cost function used during training.
+        
+        Inputs
+        ------
+        Y : numpy.ndarray
+            Exact values as a 1xn array.
+        
+        Y_hat : numpy.ndarray
+            Predicted values as a 1xn array.
+            
+        Output
+        ------
+        output : float
+            The value of the cost function.
+        """
+        cost = -np.sum(Y * np.log(Y_hat) + (1 - Y) * np.log(1 - Y_hat))/Y.size
+        
+        return cost

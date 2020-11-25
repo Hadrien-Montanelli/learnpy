@@ -15,10 +15,13 @@ class deep(classifier):
     """
     Class for representing deep networks.
     """
-    def __init__(self, n_input, n_train, n_layers, n_neurons):
+    def __init__(self, n_input, n_train, n_layers, n_neurons, 
+                 options = {'disp': False, 'jtol': 0.25, 'lr': 1, 
+                            'maxiter': 100}):
         super().__init__(n_input, n_train)
         self.n_layers = n_layers
         self.n_neurons = n_neurons
+        self.options = options
         
     def train(self, X, Y):
         """
@@ -47,9 +50,11 @@ class deep(classifier):
             grad[x>0] = 1
             return grad
             
-        # Parameters:
-        max_iteration = 150 # number of gradient descent iterations
-        lr = 1 # gradient learning rate
+        # Get the options:
+        disp = self.options['disp']
+        jtol = self.options['jtol']
+        lr = self.options['lr']
+        maxiter = self.options['maxiter']
         
         # Get the dimensions:
         d = self.n_input
@@ -68,7 +73,8 @@ class deep(classifier):
            
         # Main loop:
         iteration = 0
-        while (iteration < max_iteration):
+        J0, J = 0, 1
+        while (iteration < maxiter and J > jtol*J0):  
                  
             # Forward:
             values = {}
@@ -104,6 +110,19 @@ class deep(classifier):
                 self.params['W' + str(l)] -= lr * dW
                 self.params['W' + str(l) + str(0)] -= lr * dW0
             
+            
+            # Compute cost function:     
+            A = values['A' + str(L+1)]
+            J = self.cost(Y, A)
+            if (iteration == 0):
+                J0 = self.cost(Y, A)
+                
+            # Display informations:
+            if (disp == True and iteration % 10 == 0):
+                print('Iteration:', iteration)
+                print('Cost func:', J)
+            
+            # Update iteration count:
             iteration += 1
 
     def classify(self, X):

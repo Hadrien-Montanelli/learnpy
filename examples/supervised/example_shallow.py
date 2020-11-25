@@ -26,7 +26,8 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 # Intialize:
 n_input = len(X[0])
 n_neurons = 20
-classifier = shallow(n_input, n_train, n_neurons)
+options = {'disp': True, 'jtol': 0.2, 'lr': 1, 'maxiter': 1000}
+classifier = shallow(n_input, n_train, n_neurons, options)
 
 # Train:
 classifier.train(X_train, Y_train)

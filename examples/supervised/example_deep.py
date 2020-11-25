@@ -17,6 +17,7 @@ from learnpy.supervised import deep
 # %% Example from SKLEARN.
 
 # Get the data:
+np.random.seed(1)
 n_train = 4000
 n_test = 1000
 n_samples = n_train + n_test
@@ -26,9 +27,10 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
     
 # Intialize:
 n_input = len(X[0])
-n_layers = 2
-n_neurons = np.array([5, 5])
-classifier = deep(n_input, n_train, n_layers, n_neurons)
+n_layers = 3
+n_neurons = 10*np.ones(n_layers, int)
+options = {'disp': True, 'jtol': 0.2, 'lr': 1, 'maxiter': 1000}
+classifier = deep(n_input, n_train, n_layers, n_neurons, options)
 
 # Train:
 classifier.train(X_train, Y_train)

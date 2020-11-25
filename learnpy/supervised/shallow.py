@@ -15,9 +15,12 @@ class shallow(classifier):
     """
     Class for representing shallow networks.
     """
-    def __init__(self, n_input, n_train, n_neurons):
+    def __init__(self, n_input, n_train, n_neurons, 
+                 options = {'disp': False, 'jtol': 0.25, 'lr': 1, 
+                            'maxiter': 100}):
         super().__init__(n_input, n_train)
         self.n_neurons = n_neurons
+        self.options = options
         
     def train(self, X, Y):
         """
@@ -46,9 +49,11 @@ class shallow(classifier):
             grad[x>0] = 1
             return grad
             
-        # Parameters:
-        max_iteration = 100 # number of gradient descent iterations
-        lr = 1 # gradient learning rate
+        # Get the options:
+        disp = self.options['disp']
+        jtol = self.options['jtol']
+        lr = self.options['lr']
+        maxiter = self.options['maxiter']
         
         # Get the dimensions:
         d = self.n_input
@@ -63,8 +68,9 @@ class shallow(classifier):
 
         # Main loop:
         iteration = 0
-        while (iteration < max_iteration):
-                    
+        J0, J = 0, 1
+        while (iteration < maxiter and J > jtol*J0):     
+            
             # Forward:
             Z1 = W1.T @ X.T + W10  
             A1 = relu(Z1)
@@ -82,11 +88,22 @@ class shallow(classifier):
             dW10 = 1/n * np.sum(dZ1, axis = 1, keepdims = True)
             
             # Upadte parameters:
-            W10 = W10 - lr * dW10
-            W1 = W1 - lr * dW1
-            W20 = W20 - lr * dW20
-            W2 = W2 - lr * dW2
+            W10 -= lr * dW10
+            W1 -= lr * dW1
+            W20 -= lr * dW20
+            W2 -= lr * dW2
+
+            # Compute cost function:            
+            J = self.cost(Y, A2)
+            if (iteration == 0):
+                J0 = self.cost(Y, A2)
+                
+            # Display informations:
+            if (disp == True and iteration % 10 == 0):
+                print('Iteration:', iteration)
+                print('Cost func:', J)
             
+            # Update iteration count:
             iteration += 1
         
         # Store parameters:
