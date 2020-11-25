@@ -27,9 +27,12 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
     
 # Intialize:
 n_input = len(X[0])
-n_layers = 3
+n_layers = 2
+alpha = 10
+N = round(n_train/(alpha*(n_input + 1))/n_layers)
+n_neurons = N*np.ones(n_layers, int)
 n_neurons = 10*np.ones(n_layers, int)
-options = {'disp': True, 'jtol': 0.2, 'lr': 1, 'maxiter': 1000}
+options = {'disp': True, 'jtol': 0.2, 'lr': 1, 'maxiter': 5000}
 classifier = deep(n_input, n_train, n_layers, n_neurons, options)
 
 # Train:

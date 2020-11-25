@@ -17,7 +17,7 @@ class shallow(classifier):
     """
     def __init__(self, n_input, n_train, n_neurons, 
                  options = {'disp': False, 'jtol': 0.25, 'lr': 1, 
-                            'maxiter': 100}):
+                            'maxiter': 200}):
         super().__init__(n_input, n_train)
         self.n_neurons = n_neurons
         self.options = options
@@ -99,7 +99,7 @@ class shallow(classifier):
                 J0 = self.cost(Y, A2)
                 
             # Display informations:
-            if (disp == True and iteration % 10 == 0):
+            if (disp == True and iteration % 50 == 0):
                 print('Iteration:', iteration)
                 print('Cost func:', J)
             
