@@ -70,7 +70,7 @@ acf(x_t)              # compute the autocorrelation function
 pacf(x_t)             # compute the partial autocorrelation function
 ```
 
-The next example trains a shallow network with 15 neurons; the dataset has 20 features, the training set contains 4,000 data points while the testing set contains 1,000 data points:
+The next example trains a shallow network with 15 neurons; the dataset has 20 features, the training set contains 4,000 data points while the testing set has 1,000 points:
 ```python
 from sklearn import datasets
 from learnpy.supervised import shallow
