@@ -89,6 +89,7 @@ We've just trained and tested a shallow network that has a single hidden layer (
 
 Deep neural networks are also supported:
 ```python
+import numpy as np
 from sklearn import datasets
 from learnpy.supervised import deep
 
