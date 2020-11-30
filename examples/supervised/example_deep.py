@@ -17,7 +17,7 @@ from learnpy.supervised import deep
 # %% Example from SKLEARN.
 
 # Get the data:
-n_features = 100
+n_features = 20
 n_train = 4000
 n_test = 1000
 n_samples = n_train + n_test
