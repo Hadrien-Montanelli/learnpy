@@ -1,5 +1,5 @@
 # About
-Python package for supervised &amp; unsupervised learning, and times series.
+Python package for supervised &amp; unsupervised learning.
 
 Algorithms for **supervised learning** include:
 - naive Bayes classifier (`bayes`);
