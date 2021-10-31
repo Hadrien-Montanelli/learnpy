@@ -104,7 +104,7 @@ acc = classifier.accuracy(Y_test, Y_hat)            # compute the accuracy
 print(f'Accuracy: {acc}%')
 ```
 
-Any comment or question, send an email to: hadrien.montanelli@gmail.com
-
 # License
 See `LICENSE.txt` for licensing information.
+
+Any comment or question, send an email to: hadrien.montanelli@gmail.com
