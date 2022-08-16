@@ -32,7 +32,7 @@ n_input = len(X[0])
 n_layers = 2
 n_neurons = 20*np.ones(n_layers, int)
 options = {'acc': 'entropy', 'cost': 'entropy', 'disp': True, 'jtol': 0.2, 
-           'lr': 1, 'maxiter': 2000}
+           'lr': 1, 'maxiter': 2000, 'output': 'sigmoid'}
 classifier = deep(n_features, n_train, n_layers, n_neurons, options)
 
 # Train:

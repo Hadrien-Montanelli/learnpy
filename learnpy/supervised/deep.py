@@ -17,7 +17,8 @@ class deep(classifier):
     """
     def __init__(self, n_input, n_train, n_layers, n_neurons, 
                  options = {'acc': 'entropy', 'cost': 'entropy', 'disp': False, 
-                            'jtol': 0.25, 'lr': 1, 'maxiter': 200}):
+                            'jtol': 0.25, 'lr': 1, 'maxiter': 200, 
+                            'output': 'sigmoid'}):
         super().__init__(n_input, n_train)
         self.n_layers = n_layers
         self.n_neurons = n_neurons
@@ -56,6 +57,7 @@ class deep(classifier):
         jtol = self.options['jtol']
         lr = self.options['lr']
         maxiter = self.options['maxiter']
+        output = self.options['output']
 
         # Get the dimensions:
         d = self.n_input
@@ -91,7 +93,10 @@ class deep(classifier):
             W = self.params['W' + str(L+1)]
             W0 = self.params['W' + str(L+1) + str(0)] 
             Z = W.T @ A + W0
-            A = sigmoid(Z)
+            if (output == 'sigmoid'):
+                A = sigmoid(Z)
+            elif (output == 'linear'):
+                A = Z
             values['Z' + str(L+1)] = Z
             values['A' + str(L+1)] = A
 
@@ -104,7 +109,10 @@ class deep(classifier):
                         dA = 2 * (A - Y)/Y.size
                     elif (cost == 'entropy'):
                         dA = (A - Y) / (A * (1 - A)) 
-                    dZ = dA * dsigmoid(Z)
+                    if (output == 'sigmoid'):
+                        dZ = dA * dsigmoid(Z)
+                    elif (output == 'linear'):
+                        dZ = dA
                 else:
                     dA = W @ dZ
                     dZ = dA * drelu(Z)
@@ -148,8 +156,9 @@ class deep(classifier):
         def relu(x):
             return np.maximum(x, 0)
         
-        # Get the dimensions:
+        # Get the dimensions and output:
         L = self.n_layers
+        output = self.options['output']
 
         # Predict:
         A = X.T
@@ -161,6 +170,9 @@ class deep(classifier):
         W = self.params['W' + str(L+1)]
         W0 = self.params['W' + str(L+1) + str(0)] 
         Z = W.T @ A + W0
-        Y_hat = sigmoid(Z)
+        if (output == 'sigmoid'):
+            Y_hat = sigmoid(Z)
+        elif (output == 'linear'):
+            Y_hat = Z
         
         return Y_hat

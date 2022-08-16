@@ -30,7 +30,7 @@ Y_train, Y_test = Y[:n_train], Y[n_train:]
 n_input = len(X[0])
 n_neurons = 20
 options = {'acc': 'entropy', 'cost': 'entropy', 'disp': True, 'jtol': 0.2, 
-            'lr': 1, 'maxiter': 2000}
+            'lr': 1, 'maxiter': 2000, 'output': 'sigmoid'}
 classifier = shallow(n_input, n_train, n_neurons, options)
 
 # Train:

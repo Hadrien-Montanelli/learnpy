@@ -17,7 +17,8 @@ class shallow(classifier):
     """
     def __init__(self, n_input, n_train, n_neurons, 
                  options = {'acc': 'entropy', 'cost': 'entropy', 'disp': False, 
-                            'jtol': 0.25, 'lr': 1, 'maxiter': 200}):
+                            'jtol': 0.25, 'lr': 1, 'maxiter': 200,
+                            'output': 'sigmoid'}):
         super().__init__(n_input, n_train)
         self.n_neurons = n_neurons
         self.options = options
@@ -55,6 +56,7 @@ class shallow(classifier):
         jtol = self.options['jtol']
         lr = self.options['lr']
         maxiter = self.options['maxiter']
+        output = self.options['output']
         
         # Get the dimensions:
         d = self.n_input
@@ -76,14 +78,20 @@ class shallow(classifier):
             Z1 = W1.T @ X.T + W10  
             A1 = relu(Z1)
             Z2 = W2.T @ A1 + W20
-            A2 = sigmoid(Z2)
+            if (output == 'sigmoid'):
+                A2 = sigmoid(Z2)
+            elif (output == 'linear'):
+                A2 = Z2
     
             # Backward:
             if (cost == 'mse'):
                 dA2 = 2 * (A2 - Y)/Y.size
             elif (cost == 'entropy'):
                 dA2 = (A2 - Y) / (A2 * (1 - A2))
-            dZ2 = dA2 * dsigmoid(Z2)
+            if (output == 'sigmoid'):
+                dZ2 = dA2 * dsigmoid(Z2)
+            elif (output == 'linear'):
+                dZ2 = dA2
             dW2 = 1/n * (A1 @ dZ2.T)
             dW20 = 1/n * np.sum(dZ2, axis = 1, keepdims = True)
             dA1 = W2 @ dZ2
@@ -141,11 +149,15 @@ class shallow(classifier):
         W1 = self.params['W1']
         W20 = self.params['W20']
         W2 = self.params['W2']
+        output = self.options['output']
         
         # Predict:
         Z1 = W1.T @ X.T + W10 
         A1 = relu(Z1) 
         Z2 = W2.T @ A1 + W20
-        Y_hat = sigmoid(Z2)
+        if (output == 'sigmoid'):
+            Y_hat = sigmoid(Z2)
+        elif (output == 'linear'):
+            Y_hat = Z2
         
         return Y_hat
