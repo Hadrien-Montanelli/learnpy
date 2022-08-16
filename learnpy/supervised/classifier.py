@@ -45,9 +45,12 @@ class classifier(ABC):
         """
         def _to_binary(x):
             return 1 if x > .5 else 0
-        
-        Y_hat = np.vectorize(_to_binary)(Y_hat)
-        acc = float(Y @ Y_hat.T + (1 - Y) @ (1 - Y_hat.T))/Y.size
+        acc_func = self.options['acc']
+        if (acc_func == 'mse'):
+            acc = np.sum((Y - Y_hat)**2)/Y.size
+        elif (acc_func == 'entropy'):
+            Y_hat = np.vectorize(_to_binary)(Y_hat)
+            acc = float(Y @ Y_hat.T + (1 - Y) @ (1 - Y_hat.T))/Y.size
         acc = round(100*acc, 2)
         
         return acc
@@ -68,6 +71,11 @@ class classifier(ABC):
         output : float
             The value of the cost function.
         """
-        cost = -np.sum(Y * np.log(Y_hat) + (1 - Y) * np.log(1 - Y_hat))/Y.size
-        
+        cost_func = self.options['cost']
+        if (cost_func == 'mse'):
+            cost = np.sum((Y - Y_hat)**2)/Y.size
+        elif (cost_func == 'entropy'):
+            cost = Y * np.log(Y_hat) + (1 - Y) * np.log(1 - Y_hat)
+            cost = -np.sum(cost)/Y.size
+
         return cost

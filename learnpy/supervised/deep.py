@@ -16,8 +16,8 @@ class deep(classifier):
     Class for representing deep networks.
     """
     def __init__(self, n_input, n_train, n_layers, n_neurons, 
-                 options = {'disp': False, 'jtol': 0.25, 'lr': 1, 
-                            'maxiter': 200}):
+                 options = {'acc': 'entropy', 'cost': 'entropy', 'disp': False, 
+                            'jtol': 0.25, 'lr': 1, 'maxiter': 200}):
         super().__init__(n_input, n_train)
         self.n_layers = n_layers
         self.n_neurons = n_neurons
@@ -51,11 +51,12 @@ class deep(classifier):
             return grad
             
         # Get the options:
+        cost = self.options['cost']
         disp = self.options['disp']
         jtol = self.options['jtol']
         lr = self.options['lr']
         maxiter = self.options['maxiter']
-        
+
         # Get the dimensions:
         d = self.n_input
         n = self.n_train
@@ -99,7 +100,10 @@ class deep(classifier):
                 A, A_prev = values['A' + str(l)], values['A' + str(l-1)]
                 Z = values['Z' + str(l)]
                 if (l == L+1):
-                    dA = (A - Y) / (A * (1 - A))
+                    if (cost == 'mse'):
+                        dA = 2 * (A - Y)/Y.size
+                    elif (cost == 'entropy'):
+                        dA = (A - Y) / (A * (1 - A)) 
                     dZ = dA * dsigmoid(Z)
                 else:
                     dA = W @ dZ
@@ -117,7 +121,7 @@ class deep(classifier):
                 J0 = self.cost(Y, A)
                 
             # Display informations:
-            if (disp == True and iteration % 50 == 0):
+            if (disp == True and iteration % 100 == 0):
                 print('Iteration:', iteration)
                 print('Cost func:', J)
             

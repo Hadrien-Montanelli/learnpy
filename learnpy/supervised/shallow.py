@@ -16,8 +16,8 @@ class shallow(classifier):
     Class for representing shallow networks.
     """
     def __init__(self, n_input, n_train, n_neurons, 
-                 options = {'disp': False, 'jtol': 0.25, 'lr': 1, 
-                            'maxiter': 200}):
+                 options = {'acc': 'entropy', 'cost': 'entropy', 'disp': False, 
+                            'jtol': 0.25, 'lr': 1, 'maxiter': 200}):
         super().__init__(n_input, n_train)
         self.n_neurons = n_neurons
         self.options = options
@@ -48,8 +48,9 @@ class shallow(classifier):
             grad = np.zeros(x.shape)
             grad[x>0] = 1
             return grad
-            
+               
         # Get the options:
+        cost = self.options['cost']
         disp = self.options['disp']
         jtol = self.options['jtol']
         lr = self.options['lr']
@@ -70,7 +71,7 @@ class shallow(classifier):
         iteration = 0
         J0, J = 0, 1
         while (iteration < maxiter and J > jtol*J0):     
-            
+
             # Forward:
             Z1 = W1.T @ X.T + W10  
             A1 = relu(Z1)
@@ -78,7 +79,10 @@ class shallow(classifier):
             A2 = sigmoid(Z2)
     
             # Backward:
-            dA2 = (A2 - Y) / (A2 * (1 - A2))
+            if (cost == 'mse'):
+                dA2 = 2 * (A2 - Y)/Y.size
+            elif (cost == 'entropy'):
+                dA2 = (A2 - Y) / (A2 * (1 - A2))
             dZ2 = dA2 * dsigmoid(Z2)
             dW2 = 1/n * (A1 @ dZ2.T)
             dW20 = 1/n * np.sum(dZ2, axis = 1, keepdims = True)
@@ -99,7 +103,7 @@ class shallow(classifier):
                 J0 = self.cost(Y, A2)
                 
             # Display informations:
-            if (disp == True and iteration % 50 == 0):
+            if (disp == True and iteration % 100 == 0):
                 print('Iteration:', iteration)
                 print('Cost func:', J)
             
