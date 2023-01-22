@@ -58,7 +58,7 @@ Don't forget to `souce ~/.bash_profile` when you're done.
 
 # Getting started 
 
-I recommend taking a look at the **examples** folder. To get a taste of what computing with learnpy is like, type:
+Check out the example folder. To get a taste of what computing with learnpy is like, type:
 ```python
 import numpy as np
 from learnpy.timeseries import arp, acf, pacf
